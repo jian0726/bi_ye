@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>flow-05</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">flowchart TD
+    S(["进入博客"]) --&gt; A["加载站点配置&lt;br/&gt;GET /portal/site/config"]
+    A --&gt; B{"本地是否已登录"}
+    B --&gt;|是| C["请求头携带 Bearer Token"]
+    B --&gt;|否| D["以游客身份访问"]
+    C --&gt; E["AuthInterceptor 解析 Token&lt;br/&gt;写入 AuthContext"]
+    D --&gt; F["AuthInterceptor 放行&lt;br/&gt;上下文为空"]
+    E --&gt; G["展示首页：刊头 + 最近写的 + 时间轴"]
+    F --&gt; G
+    G --&gt; H["文章列表：置顶优先 + 发布时间倒序"]
+    H --&gt; I{"用户操作"}
+    I --&gt;|点击文章| J["进入详情页"]
+    I --&gt;|选择分类| K["按 categoryId 筛选&lt;br/&gt;游记 / 随笔 / 记录各用独立版式"]
+    I --&gt;|选择标签| L["按 tagId 先查关联再筛选"]
+    I --&gt;|搜索| M["按关键词匹配标题 / 摘要"]
+    I --&gt;|归档| N["GET /portal/articles/archive 按月分组"]
+    J --&gt; O["Markdown 渲染 + 目录锚点"]
+    O --&gt; P["浏览量：按独立访客去重&lt;br/&gt;首次访问才 +1"]
+    P --&gt; Q{"操作类型"}
+    Q --&gt;|点赞 / 收藏| R{"已登录？"}
+    R --&gt;|否| R1["跳转登录页&lt;br/&gt;?redirect=当前路径"]
+    R --&gt;|是| R2["写入记录表 + 更新计数"] --&gt; T(["结束"])</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

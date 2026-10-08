@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>百宝箱 — 简柚</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./design.css">
+<style>
+.tgroup { margin-bottom: 44px; }
+.tgroup .gt { display: flex; align-items: baseline; gap: 14px; margin-bottom: 18px; }
+.tgroup .gt .n { font-family: var(--font-display); font-size: 19px; font-weight: 700; letter-spacing: 2px; color: var(--ink-900); }
+.tgroup .gt .e { font-size: 12px; color: var(--muted); letter-spacing: 3px; }
+.tgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.tool { background: #fff; border-radius: 14px; padding: 20px; border: 1px solid var(--line);
+  transition: transform .25s, box-shadow .25s; }
+.tool:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(38,36,31,.09); }
+.tool .ic { width: 40px; height: 40px; border-radius: 11px; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 700; font-size: 17px; color: #fff; margin-bottom: 13px; }
+.tool h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.tool p { font-size: 12.5px; color: var(--muted); line-height: 1.65; }
+.links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.fl { display: flex; gap: 14px; align-items: center; background: #fff; border-radius: 14px; padding: 18px 20px; border: 1px solid var(--line); }
+.fl .lg { width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 700; color: #fff; font-size: 18px; }
+.fl h4 { font-size: 14.5px; font-weight: 600; }
+.fl p { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+.apply { margin-top: 40px; background: var(--paper-2); border-radius: 16px; padding: 26px 30px; display: flex; align-items: center; gap: 20px; }
+.apply .tx { flex: 1; }
+.apply h4 { font-family: var(--font-display); font-size: 17px; letter-spacing: 2px; margin-bottom: 5px; }
+.apply p { font-size: 13px; color: var(--muted); }
+.apply a { display: inline-block; background: var(--orange); color: #fff; font-size: 14px; letter-spacing: 2px;
+  padding: 11px 30px; border-radius: 999px; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-in">
+    <a class="brand">简<em>柚</em></a>
+    <nav class="nav">
+      <a>首页</a><a>家</a><a>游记</a><a>随笔</a><a>记录</a><a>相册</a><a class="on">百宝箱</a><a>留言</a>
+      <span class="search">搜一搜…</span>
+    </nav>
+  </div>
+</header>
+
+<section class="masthead">
+  <div class="ghost">百宝箱</div>
+  <div class="wrap">
+    <div class="kicker">TOOLBOX · 常用的都在这</div>
+    <h1>工具与<em>朋友</em></h1>
+    <p class="sub">我每天会打开的那些网址，和值得交换链接的朋友。</p>
+    <div class="rule"></div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap">
+
+    <div class="tgroup">
+      <div class="gt"><span class="n">学习工具</span><span class="e">STUDY</span></div>
+      <div class="tgrid">
+        <a class="tool"><div class="ic" style="background:#2f5d50;">Java</div><h4>Java 官方文档</h4><p>JDK 21 新特性速查，虚拟线程那章翻得最多。</p></a>
+        <a class="tool"><div class="ic" style="background:#d95d18;">SQL</div><h4>MySQL 8 手册</h4><p>ngram 全文索引的配置参数就藏在里面。</p></a>
+        <a class="tool"><div class="ic" style="background:#31393f;">Git</div><h4>Git 速查表</h4><p>回滚分支的时候救过我很多次。</p></a>
+        <a class="tool"><div class="ic" style="background:#b08968;">MD</div><h4>Markdown 指南</h4><p>写博客用的语法对照，十分钟上手。</p></a>
+      </div>
+    </div>
+
+    <div class="tgroup">
+      <div class="gt"><span class="n">效率工具</span><span class="e">TOOLS</span></div>
+      <div class="tgrid">
+        <a class="tool"><div class="ic" style="background:#4a6fa5;">JSON</div><h4>JSON 格式化</h4><p>调接口返回体的时候离不开它。</p></a>
+        <a class="tool"><div class="ic" style="background:#8d6bb0;">Reg</div><h4>正则测试</h4><p>手机号校验那条正则就是在这调的。</p></a>
+        <a class="tool"><div class="ic" style="background:#5d8a6e;">色</div><h4>配色参考</h4><p>本站柚橙主色就是照着杂志配色挑的。</p></a>
+        <a class="tool"><div class="ic" style="background:#c98a5a;">图</div><h4>图片压缩</h4><p>上传 MinIO 之前先压一道，省带宽。</p></a>
+      </div>
+    </div>
+
+    <div class="tgroup">
+      <div class="gt"><span class="n">常去网站</span><span class="e">DAILY</span></div>
+      <div class="tgrid">
+        <a class="tool"><div class="ic" style="background:#2c3e50;">GH</div><h4>GitHub</h4><p>抄作业……不是，是学习优秀开源项目。</p></a>
+        <a class="tool"><div class="ic" style="background:#1c3a31;">栈</div><h4>Stack Overflow</h4><p>报错贴上去，一半的问题有现成答案。</p></a>
+        <a class="tool"><div class="ic" style="background:#7a4a2a;">CN</div><h4>博客园</h4><p>中文技术博客的老巢，挖坟能挖到宝。</p></a>
+      </div>
+    </div>
+
+    <div class="tgroup" style="margin-bottom: 0;">
+      <div class="gt"><span class="n">朋友们</span><span class="e">FRIENDS · 6</span></div>
+      <div class="links">
+        <a class="fl"><div class="lg" style="background:#2f5d50;">柚</div><div><h4>隔壁老柚的日记</h4><p>同样在写成长记录的同学，更新很勤。</p></div></a>
+        <a class="fl"><div class="lg" style="background:#d95d18;">舟</div><div><h4>一叶扁舟</h4><p>前端玩家，CSS 玩出了花。</p></div></a>
+        <a class="fl"><div class="lg" style="background:#31393f;">山</div><div><h4>山城码农</h4><p>后端前辈，文章里全是实战坑。</p></div></a>
+        <a class="fl"><div class="lg" style="background:#8d6bb0;">云</div><div><h4>云边小站</h4><p>摄影 + 旅行，图质量极高。</p></div></a>
+        <a class="fl"><div class="lg" style="background:#4a6fa5;">盐</div><div><h4>盐 Creek</h4><p>算法竞赛退役选手，刷题记录党。</p></div></a>
+        <a class="fl"><div class="lg" style="background:#b08968;">橘</div><div><h4>橘子汽水铺</h4><p>生活流博主，文风很松弛。</p></div></a>
+      </div>
+      <div class="apply">
+        <div class="tx"><h4>想交换链接？</h4><p>站点稳定运行、内容原创，填个表提交，我审核后就挂上来。</p></div>
+        <a>申请友链 →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-in">
+    <div class="fb">简柚 · 记录路程</div>
+    <small>© 2026 jianyou.blog · 湘ICP备xxxxxxxx号</small>
+  </div>
+</footer>
+
+</body>
+</html>

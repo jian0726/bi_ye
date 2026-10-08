@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>flow-10</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">flowchart TD
+    S(["请求 /api/admin/**"]) --&gt; A["AuthInterceptor.preHandle"]
+    A --&gt; B{"OPTIONS 预检？"}
+    B --&gt;|是| B1["直接放行"] --&gt; Z(["结束"])
+    B --&gt;|否| C["截取 context-path&lt;br/&gt;得到业务路径"]
+    C --&gt; D["读取 Authorization 头&lt;br/&gt;去掉 Bearer 前缀"]
+    D --&gt; E{"Token 可解析且未过期？"}
+    E --&gt;|是| F["写入 AuthContext.LoginUser&lt;br/&gt;userId + role"]
+    E --&gt;|否| G["claims = null"]
+    F --&gt; H{"是 /admin 路径？"}
+    G --&gt; H
+    H --&gt;|否| I["门户区直接放行&lt;br/&gt;上下文有则用，无则视为游客"] --&gt; Z
+    H --&gt;|是| J{"claims 为空？"}
+    J --&gt;|是| J1["返回 401 请先登录"] --&gt; Z
+    J --&gt;|否| K{"AuthContext.isAdmin() ？"}
+    K --&gt;|否| K1["返回 403 无权限访问管理后台"] --&gt; Z
+    K --&gt;|是| L["放行至 Controller"] --&gt; Z
+    M["请求结束 afterCompletion"] --&gt; N["AuthContext.clear()&lt;br/&gt;防止线程复用串号"]</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

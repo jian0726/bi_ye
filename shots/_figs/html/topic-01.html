@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>topic-01</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1500px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">graph TB
+    subgraph Client["客户端层（单一 Vue 3 应用，两套路由与版式）"]
+        A1["博客前台 — 站点根路由&lt;br/&gt;Tailwind CSS 手写 · 杂志式"]
+        A2["管理后台 — /admin 路由组&lt;br/&gt;Element Plus · 工具风格"]
+    end
+
+    subgraph Gateway["接入层"]
+        B1["Nginx&lt;br/&gt;反向代理 / 静态资源 / HTTPS"]
+    end
+
+    subgraph App["应用服务层 - Spring Boot 3.5.5 / JDK 21"]
+        C1["Controller 接口层&lt;br/&gt;/portal · /auth · /admin · /admin/uploads"]
+        C2["Service 业务层"]
+        C3["Mapper 持久层&lt;br/&gt;MyBatis-Plus BaseMapper"]
+        C4["鉴权模块&lt;br/&gt;JwtUtil + AuthInterceptor + AuthContext&lt;br/&gt;/portal 可选 · /admin 强制 ADMIN"]
+        C5["VisitLogInterceptor&lt;br/&gt;门户 GET 访问埋点"]
+    end
+
+    subgraph Data["数据存储层"]
+        D1["MySQL 8.0&lt;br/&gt;业务数据 · 唯一索引承担去重"]
+        D2["Redis 7.x&lt;br/&gt;验证码存储"]
+        D3["MinIO&lt;br/&gt;图片与音频对象存储"]
+    end
+
+    A1 --&gt; B1
+    A2 --&gt; B1
+    B1 --&gt; C1
+    C1 --&gt; C2
+    C2 --&gt; C3
+    C2 --&gt; C4
+    C2 --&gt; C5
+    C3 --&gt; D1
+    C2 --&gt; D2
+    C2 --&gt; D3</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

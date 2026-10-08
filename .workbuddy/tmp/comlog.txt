@@ -1,0 +1,18 @@
+﻿saved D:\quanbudaima\bi_ye_she_ji\.workbuddy\tmp\out\23绾?浠诲姟涔︼紙妗堜緥妯℃澘锛?txt
+Traceback (most recent call last):
+  File "D:\quanbudaima\bi_ye_she_ji\.workbuddy\tmp\extract_doc_com.py", line 21, in <module>
+    doc.SaveAs2(dst, FileFormat=2)  # wdFormatText
+    ^^^^^^^^^^^
+  File "C:\Users\32916\.workbuddy\binaries\python\versions\3.13.12\Lib\site-packages\win32com\client\dynamic.py", line 631, in __getattr__
+    raise AttributeError(f"{self._username_}.{attr}")
+AttributeError: Open.SaveAs2
+System.Management.Automation.RemoteException
+During handling of the above exception, another exception occurred:
+System.Management.Automation.RemoteException
+Traceback (most recent call last):
+  File "D:\quanbudaima\bi_ye_she_ji\.workbuddy\tmp\extract_doc_com.py", line 25, in <module>
+    word.Quit()
+    ^^^^^^^^^
+  File "C:\Users\32916\.workbuddy\binaries\python\versions\3.13.12\Lib\site-packages\win32com\client\dynamic.py", line 631, in __getattr__
+    raise AttributeError(f"{self._username_}.{attr}")
+AttributeError: Word.Application.Quit

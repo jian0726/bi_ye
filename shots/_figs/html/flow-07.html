@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>flow-07</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">flowchart TD
+    S(["点击 ❤ 或 🔖"]) --&gt; A{"已登录？"}
+    A --&gt;|否| A1["跳转登录页&lt;br/&gt;?redirect=当前文章"] --&gt; Z(["结束"])
+    A --&gt;|是| B["取 AuthContext.getUserId()"]
+    B --&gt; C{"userId 为空？"}
+    C --&gt;|是| C1["401 请先登录"] --&gt; Z
+    C --&gt;|否| D["插入 t_like_record / t_collect&lt;br/&gt;（user_id, target_id）"]
+    D --&gt; E{"唯一索引冲突？"}
+    E --&gt;|是| E1["DuplicateKeyException&lt;br/&gt;→ 400 已经点过赞啦 / 已收藏"] --&gt; Z
+    E --&gt;|否| F["UPDATE 目标表计数 +1&lt;br/&gt;（article.like_count / collect_count）"]
+    F --&gt; G["返回成功，前台红心置为实心"]
+    G --&gt; H["刷新页面"]
+    H --&gt; I["列表 / 详情按 user_id 批量查记录"]
+    I --&gt; J["liked / collected 回显为 true"]
+    J --&gt; K["红心保持实心，计数与库一致"]
+    K --&gt; Z
+    L(["取消点赞 / 取消收藏"]) --&gt; M["删除记录"]
+    M --&gt; N["计数 -1（GREATEST 兜底不小于 0）"]
+    N --&gt; Z</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>flow-01</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1500px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">graph TB
+    ROOT["简柚个人博客系统&lt;br/&gt;JianYou Blog"]
+
+    ROOT --&gt; PORTAL["博客前台"]
+    ROOT --&gt; ADMIN["管理后台"]
+
+    PORTAL --&gt; P1["用户模块"]
+    PORTAL --&gt; P2["内容模块"]
+    PORTAL --&gt; P3["互动模块"]
+
+    P1 --&gt; P11["手机号注册"]
+    P1 --&gt; P12["邮箱注册"]
+    P1 --&gt; P13["账号登录（手机号/邮箱）"]
+    P1 --&gt; P14["退出登录"]
+    P1 --&gt; P15["个人中心&lt;br/&gt;头像 / 昵称简介 / 密码"]
+    P1 --&gt; P16["我的收藏"]
+
+    P2 --&gt; P21["首页"]
+    P2 --&gt; P22["文章详情"]
+    P2 --&gt; P23["分类浏览&lt;br/&gt;游记 / 随笔 / 记录"]
+    P2 --&gt; P24["标签浏览"]
+    P2 --&gt; P25["归档时间线"]
+    P2 --&gt; P26["关键词搜索"]
+    P2 --&gt; P28["家（关于我）"]
+    P2 --&gt; P29["相册 / 百宝箱"]
+
+    P3 --&gt; P31["文章点赞（需登录）"]
+    P3 --&gt; P32["文章收藏（需登录）"]
+    P3 --&gt; P33["留言板文字雨"]
+    P3 --&gt; P34["友链申请"]
+
+    ADMIN --&gt; A1["内容管理"]
+    ADMIN --&gt; A2["互动管理"]
+    ADMIN --&gt; A3["用户管理"]
+    ADMIN --&gt; A4["系统管理"]
+
+    A1 --&gt; A11["文章管理"]
+    A1 --&gt; A12["分类管理"]
+    A1 --&gt; A13["标签管理"]
+    A1 --&gt; A14["相册管理"]
+    A1 --&gt; A15["音乐管理"]
+
+    A2 --&gt; A21["留言管理"]
+    A2 --&gt; A22["友链审核"]
+
+    A3 --&gt; A31["用户列表"]
+    A3 --&gt; A32["启用 / 禁用"]
+
+    A4 --&gt; A41["数据看板"]
+    A4 --&gt; A42["站点设置"]
+    A4 --&gt; A43["资源管理（MinIO）"]
+
+    A11 --&gt; A111["文章列表"]
+    A11 --&gt; A112["新增 / 编辑"]
+    A11 --&gt; A113["草稿 / 发布 / 隐藏"]
+    A11 --&gt; A114["置顶"]
+    A11 --&gt; A115["删除（级联清理）"]</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

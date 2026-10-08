@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>req-01</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">graph LR
+    subgraph Actors["角色"]
+        G["游客"]
+        U["注册用户"]
+        A["管理员"]
+    end
+
+    subgraph Portal["博客前台"]
+        UC1["浏览八个页面 + 归档"]
+        UC2["关键词搜索"]
+        UC3["阅读文章详情"]
+        UC4["注册 / 登录"]
+        UC6["点赞 / 收藏（需登录）"]
+        UC7["发布留言（需登录）"]
+        UC8["申请友链"]
+        UC9["维护个人资料"]
+    end
+
+    subgraph Admin["管理后台"]
+        AC1["仪表盘"]
+        AC2["文章管理"]
+        AC3["分类 / 标签管理"]
+        AC4["相册 / 音乐管理"]
+        AC5["留言管理"]
+        AC6["用户 / 友链 / 资源管理"]
+        AC7["站点设置"]
+    end
+
+    G --&gt; UC1
+    G --&gt; UC2
+    G --&gt; UC3
+    G --&gt; UC4
+    U --&gt; UC6
+    U --&gt; UC7
+    U --&gt; UC8
+    U --&gt; UC9
+    A --&gt; AC1
+    A --&gt; AC2
+    A --&gt; AC3
+    A --&gt; AC4
+    A --&gt; AC5
+    A --&gt; AC6
+    A --&gt; AC7</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

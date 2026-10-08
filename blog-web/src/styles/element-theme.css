@@ -1,0 +1,14 @@
+/**
+ * Element Plus 主题覆盖
+ * 后台（及全站 ElMessage 等挂在 body 的组件）主色统一为简柚柚橙，
+ * 不再使用 Element Plus 默认蓝。
+ */
+:root {
+  --el-color-primary: #d95d18;
+  --el-color-primary-light-3: #e48d5d;
+  --el-color-primary-light-5: #ecae8c;
+  --el-color-primary-light-7: #f4ceba;
+  --el-color-primary-light-8: #f7dfd1;
+  --el-color-primary-light-9: #fbefe8;
+  --el-color-primary-dark-2: #ae4a13;
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#faf9f7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#17150f" media="(prefers-color-scheme: dark)" />
+    <title>简柚 · 记录技术与生活</title>
+    <meta name="description" content="一个关于编程、设计与思考的个人空间" />
+    <script>
+      // 提前应用主题，避免首屏闪白。默认浅色（暖纸白），用户手动切换后才跟随 localStorage
+      (function () {
+        const stored = localStorage.getItem('theme')
+        const theme = stored === 'dark' || stored === 'light' ? stored : 'light'
+        document.documentElement.classList.remove('light', 'dark')
+        document.documentElement.classList.add(theme)
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

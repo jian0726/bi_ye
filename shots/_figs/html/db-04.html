@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>db-04</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">flowchart LR
+    A["访问文章详情 /article/{id}"] --&gt; B["校验文章已发布&lt;br/&gt;未发布 / 不存在 → 404，不计数"]
+    B --&gt; C["取访客标识&lt;br/&gt;登录 u:{userId}，游客 ip:{IP}"]
+    C --&gt; D{"INSERT IGNORE&lt;br/&gt;t_view_record"}
+    D --&gt;|影响行数 1（首次）| E["UPDATE t_article&lt;br/&gt;view_count = view_count + 1"]
+    D --&gt;|影响行数 0（已读过）| F["跳过，不计数"]
+    E --&gt; G["返回最新浏览量"]
+    F --&gt; G</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

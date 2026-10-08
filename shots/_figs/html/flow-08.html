@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>flow-08</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">flowchart TD
+    S(["进入留言页"]) --&gt; A["GET /portal/messages&lt;br/&gt;拉取历史留言（page=1&amp;size=50）"]
+    A --&gt; B["为每条留言随机分配&lt;br/&gt;横向位置 / 落速 / 出现延迟"]
+    B --&gt; C["canvas 逐帧绘制整句字幅&lt;br/&gt;缓缓下落，出生淡入、近底部淡出"]
+    C --&gt; C2["鼠标左右移动 → 全局风向偏移&lt;br/&gt;带惯性与微倾"]
+    C2 --&gt; D{"用户提交留言"}
+    D --&gt; E{"已登录？"}
+    E --&gt;|是| F["POST /portal/messages 落库"]
+    F --&gt; G["重新拉取列表"]
+    G --&gt; H["新字幅加入飘落队列"]
+    E --&gt;|否| I["仅本地飘落这一次&lt;br/&gt;不落库，刷新即散"]
+    I --&gt; Z(["结束"])
+    H --&gt; Z
+    J(["博主进入后台留言管理"]) --&gt; K["GET /admin/messages&lt;br/&gt;按 IP 属地筛选、按时间倒序分页"]
+    K --&gt; L["DELETE /admin/messages/{id}&lt;br/&gt;删除违规留言，前台字幅一并消失"]
+    L --&gt; Z</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

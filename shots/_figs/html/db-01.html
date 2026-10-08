@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>db-01</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:2000px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">erDiagram
+    USER ||--o{ ARTICLE : "撰写"
+    USER ||--o{ LIKE_RECORD : "点赞"
+    USER ||--o{ COLLECT : "收藏"
+    USER ||--o{ MESSAGE : "留言"
+
+    CATEGORY ||--o{ ARTICLE : "归类"
+    ARTICLE ||--o{ ARTICLE_TAG : "拥有"
+    TAG ||--o{ ARTICLE_TAG : "被标记"
+    ARTICLE ||--o{ COLLECT : "被收藏"
+    LIKE_RECORD }o--|| ARTICLE : "目标为文章"
+    ARTICLE ||--o{ VIEW_RECORD : "被浏览"
+
+    USER {
+        BIGINT id PK "用户ID"
+        VARCHAR phone UK "手机号"
+        VARCHAR email UK "邮箱"
+        VARCHAR password "密码BCrypt"
+        VARCHAR nickname "昵称"
+        VARCHAR avatar "头像"
+        VARCHAR bio "简介"
+        TINYINT gender "性别"
+        VARCHAR role "角色 USER/ADMIN"
+        TINYINT status "状态"
+        DATETIME create_time "创建时间"
+    }
+
+    ARTICLE {
+        BIGINT id PK "文章ID"
+        VARCHAR title "标题"
+        VARCHAR summary "摘要"
+        MEDIUMTEXT content "Markdown正文"
+        VARCHAR cover "封面图"
+        BIGINT category_id FK "分类ID"
+        BIGINT author_id FK "作者ID"
+        TINYINT status "状态 0草稿1发布2隐藏"
+        TINYINT is_top "置顶"
+        TINYINT is_recommend "推荐"
+        BIGINT view_count "浏览量"
+        BIGINT like_count "点赞数"
+        BIGINT collect_count "收藏数"
+        INT word_count "字数"
+        INT read_minutes "预计阅读分钟"
+        DATETIME publish_time "发布时间"
+        DATETIME create_time "创建时间"
+        DATETIME update_time "更新时间"
+    }
+
+    CATEGORY {
+        BIGINT id PK "分类ID"
+        VARCHAR name "分类名"
+        VARCHAR slug "URL别名"
+        VARCHAR description "描述"
+        VARCHAR icon "图标标识"
+        INT sort_order "排序权重"
+        DATETIME create_time "创建时间"
+    }
+
+    TAG {
+        BIGINT id PK "标签ID"
+        VARCHAR name "标签名"
+        VARCHAR slug "URL别名"
+        VARCHAR color "展示颜色"
+        DATETIME create_time "创建时间"
+    }
+
+    ARTICLE_TAG {
+        BIGINT article_id PK "文章ID"
+        BIGINT tag_id PK "标签ID"
+    }
+
+    LIKE_RECORD {
+        BIGINT id PK "主键"
+        BIGINT user_id FK "点赞人ID"
+        BIGINT target_id "目标ID"
+        DATETIME create_time "点赞时间"
+    }
+
+    COLLECT {
+        BIGINT id PK "主键"
+        BIGINT user_id FK "收藏人ID"
+        BIGINT article_id FK "文章ID"
+        DATETIME create_time "收藏时间"
+    }
+
+    VIEW_RECORD {
+        BIGINT id PK "主键"
+        BIGINT article_id FK "文章ID"
+        VARCHAR visitor_key "访客标识 u:id / ip:IP"
+        DATETIME create_time "首次浏览时间"
+    }
+
+    MESSAGE {
+        BIGINT id PK "留言ID"
+        BIGINT user_id FK "留言人ID"
+        VARCHAR nickname "游客昵称"
+        VARCHAR email "游客邮箱"
+        VARCHAR content "内容"
+        VARCHAR ip_location "IP属地"
+        DATETIME create_time "留言时间"
+    }
+
+    FRIEND_LINK {
+        BIGINT id PK "友链ID"
+        VARCHAR name "站点名称"
+        VARCHAR url "站点地址"
+        VARCHAR logo "站点图标"
+        VARCHAR description "站点描述"
+        TINYINT status "0待审1上架2下架"
+        INT sort_order "排序权重"
+        DATETIME create_time "申请时间"
+    }
+
+    FILE {
+        BIGINT id PK "资源ID"
+        VARCHAR name "原文件名"
+        VARCHAR object_key "MinIO对象键"
+        VARCHAR url "访问地址"
+        VARCHAR type "MIME类型"
+        BIGINT size "文件大小"
+        DATETIME create_time "上传时间"
+    }
+
+    VISIT_LOG {
+        BIGINT id PK "日志ID"
+        VARCHAR ip "客户端IP"
+        VARCHAR province "省份"
+        VARCHAR path "访问路径"
+        VARCHAR user_agent "浏览器UA"
+        DATETIME create_time "访问时间"
+    }
+
+    SITE_CONFIG {
+        VARCHAR config_key PK "配置键"
+        VARCHAR config_value "配置值"
+        DATETIME update_time "更新时间"
+    }
+
+    PHOTO {
+        BIGINT id PK "照片ID"
+        VARCHAR title "标题"
+        VARCHAR url "图片地址"
+        VARCHAR location "拍摄地点"
+        DATE taken_date "拍摄日期"
+        VARCHAR ratio "宽高比"
+        VARCHAR tone "占位渐变色"
+        VARCHAR emoji "占位符号"
+        INT sort_order "排序权重"
+        TINYINT status "1显示2隐藏"
+        DATETIME create_time "创建时间"
+    }
+
+    MUSIC {
+        BIGINT id PK "音乐ID"
+        VARCHAR title "曲名"
+        VARCHAR artist "作者来源"
+        VARCHAR url "音频地址"
+        INT sort_order "排序权重"
+        TINYINT status "1启用2停用"
+        DATETIME create_time "创建时间"
+    }</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

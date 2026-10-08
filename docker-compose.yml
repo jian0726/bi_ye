@@ -1,0 +1,141 @@
+# ============================================================
+# 简柚个人博客 - 一键部署编排
+# 用法（推荐）：bash scripts/deploy.sh  或  powershell -File scripts\deploy.ps1
+#   等价手动：BACKEND_PORT=8081 FRONTEND_PORT=5174 docker compose up -d --build
+# 访问：前端 http://localhost:5174  后端 API http://localhost:8081
+# 说明：宿主机 3306/6379 已被本地服务占用，故映射到 3307/6380；
+#       容器网络内部仍使用默认端口，互不影响
+# 端口冲突：宿主机端口可用环境变量覆盖（默认值不变），例如本机 8080 已被
+#       其他项目的 Jenkins 占用时：
+#         BACKEND_PORT=8081 docker compose up -d
+#       前端同理：FRONTEND_PORT=5175 docker compose up -d
+#       （容器内端口与 nginx 反代均不受影响，前端仍通过服务名 backend:8080 访问）
+# ⚠ 端口覆盖必须【每条 compose 命令都写全】——--force-recreate 不继承环境变量
+# ============================================================
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: jianyou-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root2026
+      MYSQL_DATABASE: jianyou_blog
+      MYSQL_USER: jianyou
+      MYSQL_PASSWORD: jianyou2026
+      TZ: Asia/Shanghai
+    volumes:
+      - mysql-data:/var/lib/mysql
+      # 首次启动自动建库建表 + 灌入演示数据（17 篇文章 / 相册 / 留言 / 友链；互动计数与点赞、收藏记录不预置）
+      # init.sql 是全项目唯一建库脚本（已合并历史全部 upgrade 变更，可重复执行）；
+      # 仅在数据卷为空时由 MySQL 自动执行一次。对已存在的库要重建，请先清空数据卷：
+      #   docker compose down -v && docker compose up -d
+      - ./blog-backend/src/main/resources/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "3307:3306"
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot2026"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    networks:
+      jianyou-net:
+        ipv4_address: 172.28.0.11
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: jianyou-redis
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6380:6379"
+    networks:
+      jianyou-net:
+        ipv4_address: 172.28.0.12
+    restart: unless-stopped
+
+  # MinIO 对象存储：图片上传（9000 API / 9001 控制台）
+  minio:
+    image: minio/minio:latest
+    container_name: jianyou-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin2026
+    volumes:
+      - minio-data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    networks:
+      jianyou-net:
+        ipv4_address: 172.28.0.13
+    restart: unless-stopped
+
+  backend:
+    build: ./blog-backend
+    container_name: jianyou-backend
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DB: jianyou_blog
+      MYSQL_USER: jianyou
+      MYSQL_PASSWORD: jianyou2026
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      MINIO_ENDPOINT: http://minio:9000
+      # 浏览器从宿主机访问图片，走 localhost
+      MINIO_ACCESS_URL: http://localhost:9000
+      # 可信反向代理白名单：容器内前端 nginx 走容器网络访问后端，来源 IP 不在默认 127.0.0.1 内；
+      # 若不加入名单，nginx 传来的 X-Forwarded-For 会被忽略，所有访客都记成同一个内网 IP（归属地全错）。
+      # ⚠ 只白名单【前端容器那一个固定 IP】（见文件末尾 networks 的 ipv4_address），
+      #   绝不能写整个网段 —— Docker 网关（...0.1）也在网段内，宿主机直连后端时 remoteAddr 即网关 IP，
+      #   写网段等于对宿主机开放 XFF 伪造（实测 8.8.8.8 可被写库）。
+      APP_TRUSTED_PROXIES: ${APP_TRUSTED_PROXIES:-127.0.0.1,::1,172.28.0.3}
+      # 访问日志保留天数与清理时间（生产化口径）
+      VISIT_LOG_RETENTION_DAYS: ${VISIT_LOG_RETENTION_DAYS:-90}
+      VISIT_LOG_PURGE_CRON: ${VISIT_LOG_PURGE_CRON:-0 0 4 * * ?}
+      # 上线必须关闭：找回密码验证码改为真实通道后置 false
+      VERIFY_DEV_MODE: ${VERIFY_DEV_MODE:-false}
+      JWT_SECRET: ${JWT_SECRET:-jianyou-blog-jwt-secret-please-override-in-production-0123456789}
+      TZ: Asia/Shanghai
+    ports:
+      - "${BACKEND_PORT:-8080}:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      minio:
+        condition: service_started
+    networks:
+      jianyou-net:
+        ipv4_address: 172.28.0.2
+    restart: unless-stopped
+
+  frontend:
+    build: ./blog-web
+    container_name: jianyou-frontend
+    ports:
+      - "${FRONTEND_PORT:-5174}:80"
+    # 固定 IP 用于后端可信代理白名单（nginx 反代时 XFF 校验只能认这个地址）
+    networks:
+      jianyou-net:
+        ipv4_address: 172.28.0.3
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+# 自定义网段：固定 subnet，使前端容器能拿到稳定 IP 供后端白名单引用
+networks:
+  jianyou-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/24
+
+volumes:
+  mysql-data:
+  redis-data:
+  minio-data:

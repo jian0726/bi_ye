@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>db-06</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">flowchart TD
+    A["前端选择文件"] --&gt; B{"文件类型 / 大小校验"}
+    B --&gt;|图片| C["≤5MB，jpg/png/webp/gif"]
+    B --&gt;|头像| C1["≤2MB，仅图片"]
+    B --&gt;|音频| C2["mp3 / flac，单文件 ≤1028MB"]
+    C --&gt; D["写入 MinIO（桶不存在则创建并设匿名只读）"]
+    C1 --&gt; D
+    C2 --&gt; D
+    D --&gt; E["写入 t_file 记录（objectKey / url / size）"]
+    E --&gt; F["返回可直链访问的 url"]</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

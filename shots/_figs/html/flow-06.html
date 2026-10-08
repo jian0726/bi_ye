@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>flow-06</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">flowchart TD
+    S(["管理员登录"]) --&gt; A["进入文章管理"]
+    A --&gt; B["点击新增文章"]
+    B --&gt; C["填写标题、摘要"]
+    C --&gt; D["Markdown 编辑器撰写正文（实时预览）"]
+    D --&gt; E["选择分类、标签、封面"]
+    E --&gt; G{"选择保存方式"}
+    G --&gt;|保存草稿| H1["status = 0"]
+    G --&gt;|直接发布| H2["status = 1，publish_time = now"]
+    H1 --&gt; I["统计：word_count = 去空白字符数&lt;br/&gt;read_minutes = max(1, ⌈字数/400⌉)"]
+    H2 --&gt; I
+    I --&gt; J["写入 t_article（作者取当前登录管理员）"]
+    J --&gt; K["重建 t_article_tag 关联（先清后插）"]
+    K --&gt; L{"是否发布？"}
+    L --&gt;|是| M["前台列表可见"]
+    L --&gt;|否| N["仅后台可见，前台不返回"]
+    M --&gt; O(["结束"])
+    N --&gt; O
+    G --&gt;|后续改状态| P["PUT /admin/articles/{id}/status&lt;br/&gt;草稿 ⇄ 已发布 ⇄ 隐藏"]
+    P --&gt; O</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

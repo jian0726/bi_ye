@@ -1,0 +1,4 @@
+﻿Installing Chrome...
+  Downloading Chrome 153.0.8010.52 for win64
+  https://storage.googleapis.com/chrome-for-testing-public/153.0.8010.52/win64/chrome-win64.zip
+

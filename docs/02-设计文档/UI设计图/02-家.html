@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>家 — 简柚</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./design.css">
+<style>
+.about-grid { display: grid; grid-template-columns: 300px 1fr; gap: 56px; align-items: start; }
+.avatar {
+  width: 300px; height: 380px; border-radius: 18px; overflow: hidden; position: relative;
+  background: linear-gradient(160deg, #2f5d50, #16241f);
+  display: flex; align-items: flex-end; padding: 24px;
+}
+.avatar .nm { font-family: var(--font-display); color: #f4f1ea; font-size: 30px; font-weight: 700; letter-spacing: 4px; }
+.avatar .nm small { display: block; font-family: var(--font-body); font-size: 12px; color: rgba(244,241,234,.55); letter-spacing: 3px; margin-top: 8px; font-weight: 400; }
+.about-body h2 { font-family: var(--font-display); font-size: 26px; letter-spacing: 2px; margin: 34px 0 16px; }
+.about-body h2:first-of-type { margin-top: 0; }
+.about-body p { color: #55524a; margin-bottom: 12px; }
+.about-body p b { color: var(--orange); font-weight: 600; }
+.mile { border-left: 2px solid var(--line); padding-left: 24px; margin-top: 8px; }
+.mile .mi { position: relative; padding-bottom: 22px; }
+.mile .mi::before { content: ''; position: absolute; left: -30px; top: 7px; width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
+.mile .y { font-family: var(--font-display); font-weight: 700; color: var(--green); font-size: 15px; letter-spacing: 1px; }
+.mile p { font-size: 14px; color: #55524a; margin-top: 4px; }
+.facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
+.fact { background: #fff; border-radius: 14px; padding: 18px; box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(38,36,31,.05); }
+.fact .n { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--orange); }
+.fact .l { font-size: 12.5px; color: var(--muted); letter-spacing: 1px; margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-in">
+    <a class="brand">简<em>柚</em></a>
+    <nav class="nav">
+      <a>首页</a><a class="on">家</a><a>游记</a><a>随笔</a><a>记录</a><a>相册</a><a>百宝箱</a><a>留言</a>
+      <span class="search">搜一搜…</span>
+    </nav>
+  </div>
+</header>
+
+<section class="masthead">
+  <div class="ghost">家</div>
+  <div class="wrap">
+    <div class="kicker">ABOUT · 关于博主</div>
+    <h1>这<em>里</em>是家</h1>
+    <p class="sub">不是"关于页"，是我把椅子拉开坐下说话的地方。</p>
+    <div class="rule"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap about-grid">
+    <aside>
+      <div class="avatar"><div class="nm">简之航<small>JIAN ZHIHANG · 软件技术 2-2405</small></div></div>
+      <div class="facts">
+        <div class="fact"><div class="n">42</div><div class="l">文章</div></div>
+        <div class="fact"><div class="n">18.6w</div><div class="l">写字</div></div>
+        <div class="fact"><div class="n">3</div><div class="l">城市</div></div>
+        <div class="fact"><div class="n">112h</div><div class="l">志愿</div></div>
+      </div>
+    </aside>
+    <div class="about-body">
+      <h2>打个招呼</h2>
+      <p>你好，我是简之航，一名软件技术专业的大三学生，常驻长沙。这个站没有别的用途，就是一个<b>成长记录本</b>——把学过的东西、走过的路、偶尔冒出来的念头，按时间放进来。</p>
+      <p>我知道这类站点 thousands 里挑一，但"自己写"和"发在平台上"是两种完全不同的感觉：这里没有热度，也没有算法推荐，只有按月份装订的进度条。</p>
+      <h2>我现在在做的事</h2>
+      <p>主线是 <b>Java 后端</b>（Spring Boot 3 / MySQL / Redis），副线是把这个博客本身当成练习场——你现在看到的每一个页面，背后都对应一篇开发记录。</p>
+      <h2>这一路</h2>
+      <div class="mile">
+        <div class="mi"><div class="y">2024 · 入学</div><p>第一次写 Hello World，用记事本保存成 .java，编译报错八次。</p></div>
+        <div class="mi"><div class="y">2025 · 上路</div><p>拿下楚怡杯省赛二等奖；开始写第一篇开发记录，从此没停。</p></div>
+        <div class="mi"><div class="y">2026 · 现在</div><p>校双创大赛一等奖；博客后台第 3 次重构，也是最后一次。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-in">
+    <div class="fb">简柚 · 记录路程</div>
+    <small>© 2026 jianyou.blog · 湘ICP备xxxxxxxx号</small>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>flow-02</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1500px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">graph TB
+    subgraph L1["表现层 Controller"]
+        C1["Portal 前台接口&lt;br/&gt;/portal/**"]
+        C2["Admin 后台接口&lt;br/&gt;/admin/**"]
+        C3["Auth 认证接口&lt;br/&gt;/auth/**"]
+    end
+
+    subgraph L2["安全层"]
+        S1["AuthInterceptor&lt;br/&gt;JWT 解析 → AuthContext"]
+        S2["后台路径强制 role=ADMIN"]
+        S3["VisitLogInterceptor&lt;br/&gt;访问埋点"]
+    end
+
+    subgraph L3["业务层 Service"]
+        B1["ArticleService"]
+        B2["UserService"]
+        B3["LikeService / CollectService"]
+        B4["MessageService"]
+        B5["AdminService"]
+        B6["CategoryService / TagService"]
+        B7["AlbumService / MusicService"]
+        B8["FriendLinkService / SiteService"]
+        B9["VisitService / StorageService"]
+    end
+
+    subgraph L4["持久层 Mapper"]
+        M1["MyBatis-Plus BaseMapper&lt;br/&gt;LambdaQueryWrapper 条件构造"]
+    end
+
+    subgraph L5["数据层"]
+        D1["MySQL 8.0"]
+        D2["Redis 7.x"]
+        D3["MinIO"]
+    end
+
+    L1 --&gt; L2 --&gt; L3 --&gt; L4 --&gt; L5
+    L3 -.验证码存取.-&gt; D2
+    L3 -.文件上传.-&gt; D3</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

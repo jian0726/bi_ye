@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>flow-15</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">stateDiagram-v2
+    [*] --&gt; 未点赞 : 用户访问文章
+    未点赞 --&gt; 已点赞 : 点击点赞，插入 t_like_record，计数 +1
+    已点赞 --&gt; 已点赞 : 重复点击被唯一索引拦截（400 已经点过赞啦）
+    已点赞 --&gt; 未点赞 : 取消点赞，删除记录，计数 -1
+    已点赞 --&gt; [*] : 目标被删除时级联清理记录
+    未点赞 --&gt; [*] : 目标被删除</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

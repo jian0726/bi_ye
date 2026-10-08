@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>db-03</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">flowchart TD
+    A["点击点赞 / 收藏"] --&gt; B{"已登录？"}
+    B --&gt;|否| B1["跳转登录页（redirect 回原页面）"]
+    B --&gt;|是| C["写入 t_like_record / t_collect"]
+    C --&gt; D{"唯一索引冲突？"}
+    D --&gt;|是 DuplicateKeyException| D1["400 已经点过赞啦 / 已收藏"]
+    D --&gt;|否| E["UPDATE 目标表计数 +1"]
+    E --&gt; F["返回成功，前端红心置为实心"]
+    F --&gt; G["刷新页面"]
+    G --&gt; H["详情接口按 user_id 批量查 liked / collected"]
+    H --&gt; I["红心状态保持实心"]</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

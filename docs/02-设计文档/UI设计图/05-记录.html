@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>记录 — 简柚</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./design.css">
+<style>
+.years { display: flex; gap: 14px; margin-bottom: 40px; }
+.years span { font-family: var(--font-display); font-size: 15px; letter-spacing: 2px; color: var(--muted); padding: 6px 18px; border-radius: 999px; border: 1px solid var(--line); background: #fff; }
+.years .on { background: var(--ink-900); color: #f4f1ea; border-color: var(--ink-900); font-weight: 700; }
+.rc { position: relative; padding-left: 44px; max-width: 880px; }
+.rc::before { content: ''; position: absolute; left: 12px; top: 8px; bottom: 8px; width: 2px; background: var(--line); }
+.rc-month { position: relative; font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--green); margin: 38px 0 16px; }
+.rc-month:first-child { margin-top: 0; }
+.rc-month .cnt { font-family: var(--font-body); font-size: 12px; color: var(--muted); font-weight: 400; letter-spacing: 2px; margin-left: 12px; }
+.rc-month::before { content: ''; position: absolute; left: -37px; top: 50%; transform: translateY(-50%); width: 12px; height: 12px; border-radius: 50%; background: var(--orange); border: 3px solid var(--paper); box-shadow: 0 0 0 2px var(--orange); }
+.rc-item { position: relative; background: #fff; border-radius: 14px; padding: 18px 22px; margin-bottom: 14px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(38,36,31,.05); display: flex; gap: 20px; align-items: center; }
+.rc-item::before { content: ''; position: absolute; left: -32px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; background: var(--paper-3); outline: 2px solid var(--line); }
+.rc-item .d { font-family: var(--font-display); font-size: 13px; color: var(--orange); min-width: 58px; letter-spacing: 1px; }
+.rc-item h3 { font-size: 15.5px; font-weight: 600; flex: 1; }
+.rc-item .len { font-size: 12px; color: var(--muted); letter-spacing: 1px; }
+.load { text-align: center; margin-top: 36px; }
+.load span { display: inline-block; padding: 12px 40px; border: 1px solid var(--line); border-radius: 999px; background: #fff; font-size: 14px; letter-spacing: 3px; color: #55524a; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-in">
+    <a class="brand">简<em>柚</em></a>
+    <nav class="nav">
+      <a>首页</a><a>家</a><a>游记</a><a>随笔</a><a class="on">记录</a><a>相册</a><a>百宝箱</a><a>留言</a>
+      <span class="search">搜一搜…</span>
+    </nav>
+  </div>
+</header>
+
+<section class="masthead">
+  <div class="ghost">记录</div>
+  <div class="wrap">
+    <div class="kicker">LOG · 分类 01</div>
+    <h1>一天一格，<em>往下摞</em></h1>
+    <p class="sub">学过的、修好的、搞砸又重来的一切。共 24 篇。</p>
+    <div class="rule"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="years"><span class="on">2026</span><span>2025</span><span>2024</span></div>
+    <div class="rc">
+      <div class="rc-month">九月<span class="cnt">SEP · 6 篇</span></div>
+      <a class="rc-item"><span class="d">09-11</span><h3>把 JWT 双令牌重写了一遍才懂</h3><span class="len">3200 字</span></a>
+      <a class="rc-item"><span class="d">09-08</span><h3>MinIO 预签名 URL 踩坑两小时</h3><span class="len">1800 字</span></a>
+      <a class="rc-item"><span class="d">09-03</span><h3>ngram 分词器调参记录</h3><span class="len">2400 字</span></a>
+      <div class="rc-month">八月<span class="cnt">AUG · 9 篇</span></div>
+      <a class="rc-item"><span class="d">08-17</span><h3>从零搭一套博客后台，我踩过的十二个坑</h3><span class="len">6400 字</span></a>
+      <a class="rc-item"><span class="d">08-05</span><h3>Docker Compose 网络互通问题排查</h3><span class="len">2100 字</span></a>
+      <div class="rc-month">七月<span class="cnt">JUL · 7 篇</span></div>
+      <a class="rc-item"><span class="d">07-28</span><h3>第一次给项目写 Dockerfile</h3><span class="len">1900 字</span></a>
+      <a class="rc-item"><span class="d">07-15</span><h3>Jenkins 流水线跑通了</h3><span class="len">2800 字</span></a>
+    </div>
+    <div class="load"><span>加载更多 ↓</span></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-in">
+    <div class="fb">简柚 · 记录路程</div>
+    <small>© 2026 jianyou.blog · 湘ICP备xxxxxxxx号</small>
+  </div>
+</footer>
+
+</body>
+</html>

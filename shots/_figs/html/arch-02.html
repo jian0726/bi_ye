@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>arch-02</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">graph LR
+    DEV["开发者&lt;br/&gt;git push"] --&gt; GH["GitHub 仓库"]
+    GH --&gt;|Webhook 触发| JK["Jenkins&lt;br/&gt;CI/CD 流水线"]
+    JK --&gt;|1 mvn package| JAR["可执行 JAR"]
+    JK --&gt;|2 docker build| REG[("私有仓库&lt;br/&gt;registry:5000")]
+    JK --&gt;|3 docker compose pull+up| DC["Docker Compose&lt;br/&gt;生产环境"]
+    DC --&gt; NG["nginx&lt;br/&gt;80/443"]
+    DC --&gt; APP["blog-backend:8080"]
+    DC --&gt; WEB["blog-web 静态站点"]
+    DC --&gt; DB[("mysql:8.0")]
+    DC --&gt; RD[("redis:7")]
+    DC --&gt; MO[("minio:9000")]
+    DC --&gt; PROM["Prometheus + Grafana&lt;br/&gt;指标监控"]
+    DC --&gt; LOKI["Loki + Promtail&lt;br/&gt;日志聚合"]
+    NG --&gt; USER["用户浏览器"]
+    NG -.-&gt;|/api/**| APP</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

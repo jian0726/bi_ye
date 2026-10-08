@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>flow-13</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">stateDiagram-v2
+    [*] --&gt; 草稿 : 新建并保存草稿（status=0）
+    [*] --&gt; 已发布 : 直接发布（status=1）
+    草稿 --&gt; 已发布 : 点击发布
+    已发布 --&gt; 草稿 : 撤回为草稿
+    已发布 --&gt; 隐藏 : 设为隐藏
+    隐藏 --&gt; 已发布 : 重新发布
+    草稿 --&gt; [*] : 删除（物理删除，级联清理点赞/收藏）
+    已发布 --&gt; [*] : 删除（物理删除，级联清理点赞/收藏）
+    隐藏 --&gt; [*] : 删除（物理删除，级联清理点赞/收藏）</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

@@ -1,0 +1,44 @@
+>>> open http://127.0.0.1:5173/
+[exit null]
+
+
+
+>>> set viewport 1440 900
+[exit null]
+
+
+
+>>> wait 4500
+[exit null]
+
+
+
+>>> eval JSON.stringify({
+  href: location.href,
+  title: document.title,
+  appLen: (document.getElementById('app')||{innerHTML:''}).innerHTML.length,
+  mainLen: document.querySelector('main') ? document.querySelector('main').innerHTML.length : -1,
+  mainHead: document.querySelector('main') ? document.querySelector('main').innerHTML.slice(0,500) : 'NOMA',
+  reveal: document.querySelectorAll('.reveal').length,
+  visible: document.querySelectorAll('.reveal.is-visible').length,
+  opacity0: Array.from(document.querySelectorAll('.reveal')).filter(e=>getComputedStyle(e).opacity==='0').length,
+  h1: document.querySelector('h1') ? document.querySelector('h1').textContent.trim() : 'none',
+  sections: document.querySelectorAll('section').length
+})
+[exit null]
+
+
+
+>>> errors
+[exit null]
+
+
+
+>>> console
+[exit null]
+
+
+
+>>> screenshot D:\quanbudaima\bi_ye_she_ji\shots\dev-shellfix-1440.png
+[exit null]
+

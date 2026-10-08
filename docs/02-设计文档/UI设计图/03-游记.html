@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>游记 — 简柚</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./design.css">
+<style>
+/* 封面卡片流：大图两列，错落 */
+.flow { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+.fcard { background: #fff; border-radius: 18px; overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 12px 34px rgba(38,36,31,.07); transition: transform .3s; }
+.fcard:nth-child(even) { transform: translateY(26px); }
+.fcard .cover { height: 240px; border-radius: 0; }
+.fcard .cover .cv-title { font-size: 26px; }
+.fcard .fb2 { padding: 20px 22px 22px; }
+.fcard .loc { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.fcard .loc .pl { font-size: 12.5px; letter-spacing: 2px; color: var(--green); font-weight: 600; }
+.fcard h3 { font-family: var(--font-display); font-size: 20px; letter-spacing: 1px; margin-bottom: 8px; }
+.fcard p { font-size: 13.5px; color: var(--muted); line-height: 1.7; }
+.fcard .foot { display: flex; justify-content: space-between; margin-top: 14px; }
+/* 行程小条 */
+.route { display: flex; gap: 10px; align-items: center; margin-top: 26px; }
+.route .stop { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 8px 18px; font-size: 13px; color: #55524a; letter-spacing: 1px; }
+.route .stop.on { background: var(--ink-900); border-color: var(--ink-900); color: #f4f1ea; }
+.route .dash { flex: 1; border-top: 1px dashed var(--line); }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-in">
+    <a class="brand">简<em>柚</em></a>
+    <nav class="nav">
+      <a>首页</a><a>家</a><a class="on">游记</a><a>随笔</a><a>记录</a><a>相册</a><a>百宝箱</a><a>留言</a>
+      <span class="search">搜一搜…</span>
+    </nav>
+  </div>
+</header>
+
+<section class="masthead">
+  <div class="ghost">游记</div>
+  <div class="wrap">
+    <div class="kicker">TRAVEL · 分类 02</div>
+    <h1>出门，<em>看世界</em></h1>
+    <p class="sub">去过的地方、走过的路，趁记性还好，都写下来。共 11 篇。</p>
+    <div class="rule"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="route">
+      <span class="stop on">全部</span><span class="stop">湖南</span><span class="stop">周边省</span><span class="stop">更远</span>
+      <span class="dash"></span><span class="meta">按时间倒序</span>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top: 6px;">
+  <div class="wrap flow">
+    <a class="fcard">
+      <div class="cover cv-1"><span class="cv-title">湘江夜骑</span></div>
+      <div class="fb2">
+        <div class="loc"><span class="pl">长沙 · 橘子洲</span><span class="meta">09-14</span></div>
+        <h3>沿着湘江骑到凌晨的橘子洲</h3>
+        <p>晚上十点出发，江风把白天的燥意吹干净，骑到洲头时灯全亮着，像给夜航船留的。</p>
+        <div class="foot"><span class="tag">游记</span><span class="meta">约 2100 字 · 18 图</span></div>
+      </div>
+    </a>
+    <a class="fcard">
+      <div class="cover cv-4"><span class="cv-title">岳麓日出</span></div>
+      <div class="fb2">
+        <div class="loc"><span class="pl">长沙 · 岳麓山</span><span class="meta">08-09</span></div>
+        <h3>岳麓山看日出，四点半的闹钟</h3>
+        <p>闹钟响了三遍才爬起来，上山摸黑走了四十分钟，太阳出来那两分钟，值。</p>
+        <div class="foot"><span class="tag">游记</span><span class="meta">约 1600 字 · 12 图</span></div>
+      </div>
+    </a>
+    <a class="fcard">
+      <div class="cover cv-3"><span class="cv-title">凤凰两日</span></div>
+      <div class="fb2">
+        <div class="loc"><span class="pl">湘西 · 凤凰古城</span><span class="meta">05-02</span></div>
+        <h3>五一错峰去凤凰，江边住了两晚</h3>
+        <p>沱江边的吊脚楼晚上很吵，清晨很静。六点的江面有雾，摇橹船从雾里出来。</p>
+        <div class="foot"><span class="tag">游记</span><span class="meta">约 2600 字 · 24 图</span></div>
+      </div>
+    </a>
+    <a class="fcard">
+      <div class="cover cv-2"><span class="cv-title">衡山雪</span></div>
+      <div class="fb2">
+        <div class="loc"><span class="pl">衡阳 · 南岳</span><span class="meta">01-18</span></div>
+        <h3>为了看雾凇，在衡山顶上冻成冰棍</h3>
+        <p>索道排队两小时，山上零下六度，但树挂真的像走进冰箱速冻层，好看得离谱。</p>
+        <div class="foot"><span class="tag">游记</span><span class="meta">约 1900 字 · 15 图</span></div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-in">
+    <div class="fb">简柚 · 记录路程</div>
+    <small>© 2026 jianyou.blog · 湘ICP备xxxxxxxx号</small>
+  </div>
+</footer>
+
+</body>
+</html>

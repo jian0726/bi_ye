@@ -1,0 +1,6 @@
+token 注入完成
+fix-home	http://127.0.0.1:5173/	png=-1B	code=null err=Error: spawnSync C:\Users\32916\.workbuddy\binaries\node\versions\22.22.2-3\node.exe EBUSY
+fix-message	http://127.0.0.1:5173/message	png=-1B	code=null err=Error: spawnSync C:\Users\32916\.workbuddy\binaries\node\versions\22.22.2-3\node.exe EBUSY
+fix-dashboard	http://127.0.0.1:5173/admin	png=-1B	code=null err=Error: spawnSync C:\Users\32916\.workbuddy\binaries\node\versions\22.22.2-3\node.exe EBUSY
+fix-files	http://127.0.0.1:5173/admin/files	png=-1B	code=null err=Error: spawnSync C:\Users\32916\.workbuddy\binaries\node\versions\22.22.2-3\node.exe EBUSY
+fix-music	http://127.0.0.1:5173/admin/music	png=-1B	code=null err=Error: spawnSync C:\Users\32916\.workbuddy\binaries\node\versions\22.22.2-3\node.exe EBUSY

@@ -1,0 +1,12 @@
+﻿saved D:\quanbudaima\bi_ye_she_ji\.workbuddy\tmp\out\23绾?浠诲姟涔︼紙妗堜緥妯℃澘锛?doc.txt 2242
+Traceback (most recent call last):
+  File "D:\quanbudaima\bi_ye_she_ji\.workbuddy\tmp\extract_doc_com2.py", line 33, in <module>
+    txt = doc.Content.Text
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\32916\.workbuddy\binaries\python\versions\3.13.12\Lib\site-packages\win32com\client\__init__.py", line 590, in __getattr__
+    return self._ApplyTypes_(*args)
+           ~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\32916\.workbuddy\binaries\python\versions\3.13.12\Lib\site-packages\win32com\client\__init__.py", line 581, in _ApplyTypes_
+    self._oleobj_.InvokeTypes(dispid, 0, wFlags, retType, argTypes, *args),
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pywintypes.com_error: (-2147352567, '鍙戠敓鎰忓銆?, (0, None, None, None, 0, -2146827864), None)

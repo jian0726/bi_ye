@@ -1,0 +1,26 @@
+ 126 [Normal] 图3.3 系统数据库 ER 图（上：核心业务域；下：支撑域）
+ 127 [Normal] 3.2.2 数据库表设计
+ 128 [Normal] 根据上述实体关系，共设计 14 张数据表。以下给出各表的字段结构、索引与设计说明。
+ 129 [Normal] （1）user 数据表（用户表）：
+ 130 [Normal] 表3.2.1 user 数据表
+ 131 [Normal] 
+ 132 [Normal] 索引：PRIMARY(id)、uk_phone(phone)、uk_email(email)。
+ 133 [Normal] 设计说明：
+ 134 [Normal] • 全站没有用户名字段。唯一登录标识只有手机号与邮箱两者之一，登录接口 account 参数按 phone OR email 匹配。
+ 135 [Normal] • phone 与 email 均为 UNIQUE，但在 MySQL 中 NULL 值不参与唯一性约束，因此两字段允许同时为 NULL；业务层（RegisterDTO 的 @AssertTrue 跨字段校验）保证至少填写
+ 136 [Normal] • password 允许为 NULL：种子数据不写死明文密码，由 DataLoader 在应用启动时以手机号 / 邮箱为锚点补写 BCrypt 密文；password 为空的账号不可登录。
+ 137 [Normal] • 管理员通过 role = 'ADMIN' 标识，不使用独立的管理员表，简化权限模型。
+ 138 [Normal] • 无物理删除入口，用户管理只提供"禁用 / 启用"，以保证互动记录（留言、点赞、收藏）的引用完整性。
+ 139 [Normal] （2）category 数据表（分类表）：
+ 140 [Normal] 表3.2.2 category 数据表
+ 141 [Normal] 
+ 142 [Normal] 索引：PRIMARY(id)。
+ 143 [Normal] （3）tag 数据表（标签表）：
+ 144 [Normal] 表3.2.3 tag 数据表
+ 145 [Normal] 
+ 146 [Normal] 索引：PRIMARY(id)。
+ 147 [Normal] （4）article 数据表（文章表）：
+ 148 [Normal] 表3.2.4 article 数据表
+ 149 [Normal] 
+ 150 [Normal] 设计说明：
+--- 表格数: 14 ---

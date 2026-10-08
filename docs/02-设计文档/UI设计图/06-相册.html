@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>相册 — 简柚</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./design.css">
+<style>
+.groups { display: flex; gap: 14px; margin-bottom: 34px; }
+.groups span { font-size: 13.5px; letter-spacing: 2px; color: #55524a; padding: 7px 20px; border-radius: 999px; border: 1px solid var(--line); background: #fff; }
+.groups .on { background: var(--ink-900); color: #f4f1ea; border-color: var(--ink-900); font-weight: 600; }
+.masonry { columns: 4; column-gap: 16px; }
+.ph { break-inside: avoid; margin-bottom: 16px; border-radius: 12px; overflow: hidden; position: relative; cursor: zoom-in;
+  box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 8px 22px rgba(38,36,31,.07); }
+.ph .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 14px 12px; color: #fff;
+  background: linear-gradient(transparent, rgba(16,23,20,.72)); font-size: 12.5px; letter-spacing: 1px; }
+.ph .cap b { display: block; font-family: var(--font-display); font-size: 14.5px; letter-spacing: 2px; margin-bottom: 2px; }
+/* 渐变占位（模拟照片） */
+.g1 { height: 250px; background: linear-gradient(160deg,#c9a27a,#8a6844 60%,#4d3b2a); }
+.g2 { height: 170px; background: linear-gradient(160deg,#7fa08f,#2f5d50 70%,#1c3a31); }
+.g3 { height: 210px; background: linear-gradient(160deg,#e8b27d,#d95d18 65%,#8a3a0e); }
+.g4 { height: 300px; background: linear-gradient(165deg,#5d748a,#2c3e50 70%,#141d26); }
+.g5 { height: 190px; background: linear-gradient(160deg,#d9c1e8,#8d6bb0 65%,#4a3a66); }
+.g6 { height: 240px; background: linear-gradient(160deg,#a8c3b0,#5d8a6e 65%,#2c4a38); }
+.g7 { height: 160px; background: linear-gradient(160deg,#f0c9a8,#c98a5a 70%,#7a4a2a); }
+.g8 { height: 280px; background: linear-gradient(165deg,#8899aa,#3d4f5e 60%,#1a242e); }
+.g9 { height: 200px; background: linear-gradient(160deg,#e8d8b8,#b0985f 65%,#5e4e2a); }
+.g10 { height: 230px; background: linear-gradient(160deg,#b8c9d8,#6a8aa5 65%,#2c4256); }
+/* 大图弹层（示意） */
+.lightbox { position: fixed; inset: 0; background: rgba(10,14,12,.92); display: flex; align-items: center; justify-content: center; z-index: 90; }
+.lb-img { width: 62vw; height: 70vh; border-radius: 14px; background: linear-gradient(160deg,#c9a27a,#8a6844 60%,#4d3b2a); }
+.lb-bar { position: absolute; bottom: 34px; text-align: center; color: rgba(244,241,234,.85); }
+.lb-bar .t { font-family: var(--font-display); font-size: 18px; letter-spacing: 3px; }
+.lb-bar .s { font-size: 12px; letter-spacing: 2px; margin-top: 6px; color: rgba(244,241,234,.55); }
+.lb-arr { position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%;
+  background: rgba(244,241,234,.12); color: #f4f1ea; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.lb-arr.l { left: 36px; } .lb-arr.r { right: 36px; }
+.lb-close { position: absolute; top: 26px; right: 34px; color: rgba(244,241,234,.7); font-size: 14px; letter-spacing: 2px; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-in">
+    <a class="brand">简<em>柚</em></a>
+    <nav class="nav">
+      <a>首页</a><a>家</a><a>游记</a><a>随笔</a><a>记录</a><a class="on">相册</a><a>百宝箱</a><a>留言</a>
+      <span class="search">搜一搜…</span>
+    </nav>
+  </div>
+</header>
+
+<section class="masthead">
+  <div class="ghost">相册</div>
+  <div class="wrap">
+    <div class="kicker">ALBUM · 快门记录</div>
+    <h1>拍下来，<em>就算来过</em></h1>
+    <p class="sub">37 张照片 · 4 个相册 · 点击看大图，Esc 关闭</p>
+    <div class="rule"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="groups"><span class="on">全部</span><span>2026 秋</span><span>凤凰两日</span><span>岳麓日出</span><span>校园随手</span></div>
+    <div class="masonry">
+      <div class="ph"><div class="g1"></div><div class="cap"><b>湘江日落</b>2026-09-14 · 橘子洲</div></div>
+      <div class="ph"><div class="g2"></div><div class="cap"><b>雾中吊脚楼</b>2026-05-02 · 凤凰</div></div>
+      <div class="ph"><div class="g3"></div><div class="cap"><b>山顶第一缕光</b>2026-08-09 · 岳麓山</div></div>
+      <div class="ph"><div class="g4"></div><div class="cap"><b>凌晨的江面</b>2026-09-14 · 湘江</div></div>
+      <div class="ph"><div class="g5"></div><div class="cap"><b>晚霞上报亭</b>2026-07-20 · 校园</div></div>
+      <div class="ph"><div class="g6"></div><div class="cap"><b>沱江摇橹船</b>2026-05-02 · 凤凰</div></div>
+      <div class="ph"><div class="g7"></div><div class="cap"><b>索道排队处</b>2026-01-18 · 衡山</div></div>
+      <div class="ph"><div class="g8"></div><div class="cap"><b>图书馆五楼</b>2026-09-06 · 校园</div></div>
+      <div class="ph"><div class="g9"></div><div class="cap"><b>雾凇</b>2026-01-18 · 衡山</div></div>
+      <div class="ph"><div class="g10"></div><div class="cap"><b>夜骑归途</b>2026-09-14 · 湘江路</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 大图弹层示意 -->
+<div class="lightbox">
+  <div class="lb-img"></div>
+  <div class="lb-close">关闭 ✕</div>
+  <div class="lb-arr l">←</div>
+  <div class="lb-arr r">→</div>
+  <div class="lb-bar"><div class="t">湘江日落</div><div class="s">2026-09-14 · 橘子洲 · 3 / 37</div></div>
+</div>
+
+<footer class="footer">
+  <div class="footer-in">
+    <div class="fb">简柚 · 记录路程</div>
+    <small>© 2026 jianyou.blog · 湘ICP备xxxxxxxx号</small>
+  </div>
+</footer>
+
+<script id="nolbSwitch">if(new URLSearchParams(location.search).has('nolb')){var lb=document.querySelector('.lightbox');if(lb)lb.style.display='none'}</script>
+</body>
+</html>
