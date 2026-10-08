@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>flow-09</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">flowchart TD
+    S(["管理员进入数据看板"]) --&gt; A["GET /admin/dashboard"]
+    A --&gt; B{"AuthInterceptor 校验"}
+    B --&gt;|未登录| C["401 请先登录"]
+    B --&gt;|非 ADMIN| D["403 无权限访问管理后台"]
+    B --&gt;|通过| E["AdminService.dashboard() 单次聚合"]
+    E --&gt; F1["统计卡：文章总数 / 已发布 / 草稿"]
+    E --&gt; F3["留言数 / 友链待审数 / 用户数"]
+    E --&gt; F4["全站总浏览量&lt;br/&gt;SUM(article.view_count)"]
+    E --&gt; F5["今日访问：总数 + 按省份分组&lt;br/&gt;VisitService.todayStats()"]
+    F1 --&gt; G["组装 Map 返回"]
+    F2 --&gt; G
+    F3 --&gt; G
+    F4 --&gt; G
+    F5 --&gt; G
+    G --&gt; H["ECharts / Element Plus 渲染"]
+    H --&gt; I(["结束"])</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

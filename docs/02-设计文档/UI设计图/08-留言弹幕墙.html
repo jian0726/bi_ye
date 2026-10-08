@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>留言 — 简柚</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./design.css">
+<style>
+html, body { height: 100%; overflow: hidden; }
+/* ===== 黄昏天空（纯 CSS + SVG，不引外部图）===== */
+.sky {
+  position: fixed; inset: 0; overflow: hidden;
+  background: linear-gradient(180deg,
+    #1d2440 0%, #35305c 18%, #6d4a6b 34%, #a85f63 48%,
+    #d97a4a 62%, #f0a25f 74%, #f7c98d 86%, #f9e3b8 100%);
+}
+.sky .sun {
+  position: absolute; left: 50%; bottom: 26vh; transform: translateX(-50%);
+  width: 130px; height: 130px; border-radius: 50%;
+  background: radial-gradient(circle, #ffe9b0 0%, #ffd27a 45%, rgba(255,210,122,0) 72%);
+  filter: blur(1px);
+}
+.sky .cloud { position: absolute; border-radius: 999px; background: rgba(255, 226, 180, .32); filter: blur(6px); }
+.c1 { width: 340px; height: 34px; top: 22vh; left: 8vw; }
+.c2 { width: 260px; height: 26px; top: 30vh; right: 12vw; background: rgba(255,214,170,.26); }
+.c3 { width: 180px; height: 20px; top: 14vh; left: 38vw; background: rgba(255,226,180,.2); }
+.sky svg { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; display: block; }
+/* ===== 弹幕 ===== */
+.dmzone { position: absolute; left: 0; right: 0; top: 90px; bottom: 120px; overflow: hidden; }
+.track { position: absolute; left: 0; right: 0; height: 40px; }
+.dm { position: absolute; left: 100vw; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(12, 14, 16, .62); backdrop-filter: blur(4px);
+  color: #f4f1ea; border-radius: 999px; padding: 8px 18px; font-size: 13.5px; letter-spacing: 1px;
+  animation: run 30s linear infinite; }
+.dm .who { color: rgba(244,241,234,.55); font-size: 12px; }
+.dm.mine { outline: 1.5px solid rgba(240,160,107,.85); }
+@keyframes run { from { transform: translateX(0); } to { transform: translateX(calc(-100vw - 100%)); } }
+/* ===== 输入胶囊 ===== */
+.composer { position: absolute; left: 50%; bottom: 34px; transform: translateX(-50%);
+  width: min(560px, 86vw); display: flex; align-items: center; gap: 10px;
+  background: rgba(12,14,16,.62); backdrop-filter: blur(10px);
+  border: 1px solid rgba(244,241,234,.18); border-radius: 999px; padding: 10px 12px 10px 24px; }
+.composer .ph { flex: 1; color: rgba(244,241,234,.55); font-size: 14px; letter-spacing: 1px; }
+.composer .send { background: var(--orange); color: #fff; border-radius: 999px; padding: 9px 26px; font-size: 14px; letter-spacing: 3px; }
+.counter { position: absolute; left: 28px; bottom: 40px; color: rgba(244,241,234,.55); font-size: 12.5px; letter-spacing: 2px; writing-mode: vertical-rl; }
+/* 弹幕墙上导航恒亮反白 */
+.header { position: fixed; top: 0; left: 0; right: 0; background: transparent; border-bottom: none; backdrop-filter: none; }
+.header .brand, .header .nav a { color: rgba(244,241,234,.85); }
+.header .nav a.on { color: #f0a06b; }
+.header .nav .search { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); color: rgba(244,241,234,.7); }
+</style>
+</head>
+<body>
+
+<div class="sky">
+  <div class="sun"></div>
+  <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+  <!-- 远山与飞鸟剪影 -->
+  <svg viewBox="0 0 1440 320" preserveAspectRatio="none" style="height: 44vh;">
+    <path d="M0 220 L180 150 L320 205 L470 120 L640 215 L800 165 L960 225 L1120 140 L1280 200 L1440 155 L1440 320 L0 320 Z" fill="rgba(28,26,44,.55)"/>
+    <path d="M0 265 L220 210 L420 258 L610 200 L830 262 L1040 215 L1240 265 L1440 225 L1440 320 L0 320 Z" fill="rgba(16,17,30,.82)"/>
+    <g stroke="rgba(30,28,50,.8)" stroke-width="2.2" fill="none">
+      <path d="M300 84 q9 -9 18 0 M318 84 q9 -9 18 0"/>
+      <path d="M420 62 q8 -8 16 0 M436 62 q8 -8 16 0"/>
+      <path d="M1100 92 q8 -8 16 0 M1116 92 q8 -8 16 0"/>
+    </g>
+  </svg>
+</div>
+
+<header class="header">
+  <div class="header-in">
+    <a class="brand">简<em>柚</em></a>
+    <nav class="nav">
+      <a>首页</a><a>家</a><a>游记</a><a>随笔</a><a>记录</a><a>相册</a><a>百宝箱</a><a class="on">留言</a>
+      <span class="search">搜一搜…</span>
+    </nav>
+  </div>
+</header>
+
+<!-- 9 轨弹幕（同轨同速 · 负延迟错开） -->
+<div class="dmzone">
+  <div class="track" style="top: 4%;"><span class="dm" style="animation-delay:-6s;">学长你好，博客真好看 <span class="who">一叶扁舟</span></span><span class="dm" style="animation-delay:-21s;">来晚了，蹲一个更新 <span class="who">路人</span></span></div>
+  <div class="track" style="top: 14%;"><span class="dm mine" style="animation-delay:-13s;">这篇踩坑记录救了我 <span class="who">简之航</span></span><span class="dm" style="animation-delay:-27s;">湘江日落那张图好绝 <span class="who">云边小站</span></span></div>
+  <div class="track" style="top: 24%;"><span class="dm" style="animation-delay:-3s;">路过的马 <span class="who">匿名同学</span></span><span class="dm" style="animation-delay:-17s;">Jenkins 那篇什么时候写续集 <span class="who">山城码农</span></span></div>
+  <div class="track" style="top: 34%;"><span class="dm" style="animation-delay:-9s;">抱走 JWT 教程 <span class="who">盐Creek</span></span><span class="dm" style="animation-delay:-24s;">同为大三，一起加油 <span class="who">橘子汽水铺</span></span></div>
+  <div class="track" style="top: 44%;"><span class="dm" style="animation-delay:-1s;">今天也来打卡 <span class="who">隔壁老柚</span></span><span class="dm" style="animation-delay:-19s;">留言墙比便签墙好看多了 <span class="who">访客</span></span></div>
+  <div class="track" style="top: 54%;"><span class="dm" style="animation-delay:-11s;">衡山雾凇那个我想去 <span class="who">小满</span></span><span class="dm" style="animation-delay:-29s;">毕业设计加油！ <span class="who">陈老师</span></span></div>
+  <div class="track" style="top: 64%;"><span class="dm" style="animation-delay:-5s;">每天进步一点点 <span class="who">momo</span></span><span class="dm" style="animation-delay:-22s;"> RSS 订阅了 <span class="who">云边小站</span></span></div>
+  <div class="track" style="top: 74%;"><span class="dm" style="animation-delay:-15s;">多写点游记呀 <span class="who">橘子汽水铺</span></span><span class="dm" style="animation-delay:-31s;">搜索功能挺好用 <span class="who">访客</span></span></div>
+  <div class="track" style="top: 84%;"><span class="dm" style="animation-delay:-8s;">晚上好呀 <span class="who">momo</span></span><span class="dm" style="animation-delay:-26s;">站主什么时候更新相册 <span class="who">路人</span></span></div>
+</div>
+
+<div class="counter">今日 23 条 · 累计 486 条 · 登录后可发言</div>
+
+<div class="composer">
+  <span class="ph">说点什么吧…（1-100 字）</span>
+  <span class="send">发 弹 幕</span>
+</div>
+
+</body>
+</html>

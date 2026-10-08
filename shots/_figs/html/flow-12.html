@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>flow-12</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1500px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">graph LR
+    subgraph Actors["参与者"]
+        V["游客"]
+        U["注册用户"]
+        AD["管理员"]
+    end
+
+    subgraph UC1["浏览类用例"]
+        U1["浏览文章列表"]
+        U2["查看文章详情"]
+        U3["按分类 / 标签筛选"]
+        U4["关键词搜索"]
+        U5["查看归档"]
+        U6["查看家（关于）"]
+        U7["浏览相册 / 百宝箱"]
+    end
+
+    subgraph UC2["互动类用例"]
+        U8["注册"]
+        U9["登录"]
+        U10["点赞（需登录）"]
+        U11["收藏（需登录）"]
+        U12["发布留言（需登录落库）"]
+        U13["申请友链"]
+        U14["管理个人资料"]
+    end
+
+    subgraph UC3["管理类用例"]
+        U15["文章管理"]
+        U16["分类 / 标签管理"]
+        U17["相册 / 音乐管理"]
+        U18["留言管理"]
+        U19["友链审核"]
+        U20["用户管理"]
+        U21["资源管理"]
+        U22["站点设置"]
+        U23["查看数据看板"]
+    end
+
+    V --&gt; U1
+    V --&gt; U2
+    V --&gt; U3
+    V --&gt; U4
+    V --&gt; U5
+    V --&gt; U6
+    V --&gt; U7
+    V --&gt; U8
+    V --&gt; U9
+
+    U --&gt; U1
+    U --&gt; U2
+    U --&gt; U10
+    U --&gt; U11
+    U --&gt; U12
+    U --&gt; U13
+    U --&gt; U14
+
+    AD --&gt; U15
+    AD --&gt; U16
+    AD --&gt; U17
+    AD --&gt; U18
+    AD --&gt; U19
+    AD --&gt; U20
+    AD --&gt; U21
+    AD --&gt; U22
+    AD --&gt; U23</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

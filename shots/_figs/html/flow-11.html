@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>flow-11</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">flowchart TD
+    S(["开发者提交代码"]) --&gt; A["git push 到 GitHub"]
+    A --&gt; B["GitHub Webhook 触发"]
+    B --&gt; C["Jenkins 接收通知"]
+    C --&gt; D["拉取最新代码"]
+    D --&gt; E["阶段一：代码检出"]
+    E --&gt; F["阶段二：Maven 编译打包&lt;br/&gt;mvn clean package -DskipTests"]
+    F --&gt; G{"编译成功？"}
+    G --&gt;|否| H["通知失败并终止流水线"]
+    G --&gt;|是| I["阶段三：构建 Docker 镜像"]
+    I --&gt; J["阶段四：推送至私有仓库&lt;br/&gt;registry:5000"]
+    J --&gt; K["阶段五：部署机 docker compose pull"]
+    K --&gt; L["docker compose up -d"]
+    L --&gt; M["阶段六：健康检查&lt;br/&gt;/actuator/health"]
+    M --&gt; N{"健康？"}
+    N --&gt;|否| O["自动回滚上一版本"]
+    N --&gt;|是| P["清理旧镜像"]
+    P --&gt; Q["通知部署成功"]
+    Q --&gt; R(["结束"])</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

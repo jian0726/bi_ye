@@ -1,0 +1,61 @@
+>>> open file:///D:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/02-%E5%AE%B6.html
+[exit 0]
+✓ 家 — 简柚
+  file:///D:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/02-%E5%AE%B6.html
+
+
+>>> set viewport 1440 900
+[exit 0]
+✓ Done
+
+
+>>> wait 4200
+[exit 0]
+✓ Done
+
+
+>>> screenshot D:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\02-家.png --full
+[exit 0]
+✓ Screenshot saved to D:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\02-家.png
+
+
+>>> open file:///D:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/09-%E6%96%87%E7%AB%A0%E8%AF%A6%E6%83%85.html
+[exit 0]
+✓ 文章详情 — 简柚
+  file:///D:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/09-%E6%96%87%E7%AB%A0%E8%AF%A6%E6%83%85.html
+
+
+>>> set viewport 1440 900
+[exit 0]
+✓ Done
+
+
+>>> wait 4200
+[exit 0]
+✓ Done
+
+
+>>> screenshot D:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\09-文章详情.png --full
+[exit 0]
+✓ Screenshot saved to D:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\09-文章详情.png
+
+
+>>> open file:///D:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/10-%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C.html
+[exit 0]
+✓ 登录 / 注册 — 简柚
+  file:///D:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/10-%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C.html
+
+
+>>> set viewport 1440 900
+[exit 0]
+✓ Done
+
+
+>>> wait 4200
+[exit 0]
+✓ Done
+
+
+>>> screenshot D:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\10-登录注册.png
+[exit 0]
+✓ Screenshot saved to D:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\10-登录注册.png

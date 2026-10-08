@@ -1,0 +1,229 @@
+>>> open file:///d:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/01-%E9%A6%96%E9%A1%B5.html
+[exit 0]
+✓ 首页 — 简柚
+  file:///D:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/01-%E9%A6%96%E9%A1%B5.html
+
+
+>>> set viewport 1440 900
+[exit 0]
+✓ Done
+
+
+>>> wait 4200
+[exit 0]
+✓ Done
+
+
+>>> screenshot d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\01-首页.png --full
+[exit 0]
+✓ Screenshot saved to d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\01-首页.png
+
+
+>>> open file:///d:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/02-%E5%AE%B6.html
+[exit 0]
+✓ 家 — 简柚
+  file:///D:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/02-%E5%AE%B6.html
+
+
+>>> set viewport 1440 900
+[exit 0]
+✓ Done
+
+
+>>> wait 4200
+[exit 0]
+✓ Done
+
+
+>>> screenshot d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\02-家.png --full
+[exit 0]
+✓ Screenshot saved to d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\02-家.png
+
+
+>>> open file:///d:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/03-%E6%B8%B8%E8%AE%B0.html
+[exit 0]
+✓ 游记 — 简柚
+  file:///D:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/03-%E6%B8%B8%E8%AE%B0.html
+
+
+>>> set viewport 1440 900
+[exit 0]
+✓ Done
+
+
+>>> wait 4200
+[exit 0]
+✓ Done
+
+
+>>> screenshot d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\03-游记.png --full
+[exit 0]
+✓ Screenshot saved to d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\03-游记.png
+
+
+>>> open file:///d:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/04-%E9%9A%8F%E7%AC%94.html
+[exit 0]
+✓ 随笔 — 简柚
+  file:///D:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/04-%E9%9A%8F%E7%AC%94.html
+
+
+>>> set viewport 1440 900
+[exit 0]
+✓ Done
+
+
+>>> wait 4200
+[exit 0]
+✓ Done
+
+
+>>> screenshot d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\04-随笔.png --full
+[exit 0]
+✓ Screenshot saved to d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\04-随笔.png
+
+
+>>> open file:///d:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/05-%E8%AE%B0%E5%BD%95.html
+[exit 0]
+✓ 记录 — 简柚
+  file:///D:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/05-%E8%AE%B0%E5%BD%95.html
+
+
+>>> set viewport 1440 900
+[exit 0]
+✓ Done
+
+
+>>> wait 4200
+[exit 0]
+✓ Done
+
+
+>>> screenshot d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\05-记录.png --full
+[exit 0]
+✓ Screenshot saved to d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\05-记录.png
+
+
+>>> open file:///d:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/06-%E7%9B%B8%E5%86%8C.html?nolb
+[exit 0]
+✓ 相册 — 简柚
+  file:///D:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/06-%E7%9B%B8%E5%86%8C.html?nolb
+
+
+>>> set viewport 1440 900
+[exit 0]
+✓ Done
+
+
+>>> wait 4200
+[exit 0]
+✓ Done
+
+
+>>> screenshot d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\06-相册.png --full
+[exit 0]
+✓ Screenshot saved to d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\06-相册.png
+
+
+>>> open file:///d:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/06-%E7%9B%B8%E5%86%8C.html
+[exit 0]
+✓ 相册 — 简柚
+  file:///D:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/06-%E7%9B%B8%E5%86%8C.html
+
+
+>>> set viewport 1440 900
+[exit 0]
+✓ Done
+
+
+>>> wait 4200
+[exit 0]
+✓ Done
+
+
+>>> screenshot d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\06-相册-大图弹层.png
+[exit 0]
+✓ Screenshot saved to d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\06-相册-大图弹层.png
+
+
+>>> open file:///d:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/07-%E7%99%BE%E5%AE%9D%E7%AE%B1.html
+[exit 0]
+✓ 百宝箱 — 简柚
+  file:///D:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/07-%E7%99%BE%E5%AE%9D%E7%AE%B1.html
+
+
+>>> set viewport 1440 900
+[exit 0]
+✓ Done
+
+
+>>> wait 4200
+[exit 0]
+✓ Done
+
+
+>>> screenshot d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\07-百宝箱.png --full
+[exit 0]
+✓ Screenshot saved to d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\07-百宝箱.png
+
+
+>>> open file:///d:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/08-%E7%95%99%E8%A8%80%E5%BC%B9%E5%B9%95%E5%A2%99.html
+[exit 0]
+✓ 留言 — 简柚
+  file:///D:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/08-%E7%95%99%E8%A8%80%E5%BC%B9%E5%B9%95%E5%A2%99.html
+
+
+>>> set viewport 1440 900
+[exit 0]
+✓ Done
+
+
+>>> wait 4200
+[exit 0]
+✓ Done
+
+
+>>> screenshot d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\08-留言弹幕墙.png
+[exit 0]
+✓ Screenshot saved to d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\08-留言弹幕墙.png
+
+
+>>> open file:///d:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/09-%E6%96%87%E7%AB%A0%E8%AF%A6%E6%83%85.html
+[exit 0]
+✓ 文章详情 — 简柚
+  file:///D:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/09-%E6%96%87%E7%AB%A0%E8%AF%A6%E6%83%85.html
+
+
+>>> set viewport 1440 900
+[exit 0]
+✓ Done
+
+
+>>> wait 4200
+[exit 0]
+✓ Done
+
+
+>>> screenshot d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\09-文章详情.png --full
+[exit 0]
+✓ Screenshot saved to d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\09-文章详情.png
+
+
+>>> open file:///d:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/10-%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C.html
+[exit 0]
+✓ 登录 / 注册 — 简柚
+  file:///D:/quanbudaima/bi_ye_she_ji/docs/02-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/UI%E8%AE%BE%E8%AE%A1%E5%9B%BE/10-%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C.html
+
+
+>>> set viewport 1440 900
+[exit 0]
+✓ Done
+
+
+>>> wait 4200
+[exit 0]
+✓ Done
+
+
+>>> screenshot d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\10-登录注册.png
+[exit 0]
+✓ Screenshot saved to d:\quanbudaima\bi_ye_she_ji\docs\02-设计文档\UI设计图\10-登录注册.png

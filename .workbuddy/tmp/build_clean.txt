@@ -1,0 +1,37 @@
+﻿
+> blog-web@1.0.0 build
+> vue-tsc --noEmit && vite build
+
+vite v5.4.21 building for production...
+transforming...
+鉁?[39m 431 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                                  1.29 kB 鈹?gzip:   0.75 kB
+dist/assets/index-DjeZ4-Wo.css                                                  37.00 kB 鈹?gzip:   8.47 kB
+dist/assets/ArticleListView-CVgRIc6j.js                                          0.33 kB 鈹?gzip:   0.21 kB
+dist/assets/TagView-DZWAbMN4.js                                                  0.42 kB 鈹?gzip:   0.27 kB
+dist/assets/CategoryView-B27BsGiD.js                                             0.43 kB 鈹?gzip:   0.27 kB
+dist/assets/Skeleton.vue_vue_type_script_setup_true_lang-i9BI6AOX.js             0.73 kB 鈹?gzip:   0.39 kB
+dist/assets/NotFoundView-CZ7TLTiA.js                                             1.08 kB 鈹?gzip:   0.78 kB
+dist/assets/markdown-l1sn7VGD.js                                                 1.10 kB 鈹?gzip:   0.65 kB
+dist/assets/ProfileView-DijKm0RD.js                                              1.27 kB 鈹?gzip:   0.79 kB
+dist/assets/MyCollectionsView-BxbpN78U.js                                        1.73 kB 鈹?gzip:   0.99 kB
+dist/assets/MyCommentsView-DY2Pa05H.js                                           1.73 kB 鈹?gzip:   1.01 kB
+dist/assets/ArchiveView-2D7hIrKH.js                                              2.47 kB 鈹?gzip:   1.24 kB
+dist/assets/ArticleCard.vue_vue_type_script_setup_true_lang-DjYDmGDw.js          3.17 kB 鈹?gzip:   1.45 kB
+dist/assets/LoginView-BPg3TR6K.js                                                4.54 kB 鈹?gzip:   2.18 kB
+dist/assets/MessageView-BNoGJx8b.js                                              4.83 kB 鈹?gzip:   2.25 kB
+dist/assets/SearchView-BtE3ucrp.js                                               4.85 kB 鈹?gzip:   2.27 kB
+dist/assets/LinkView-RIGxCiAR.js                                                 5.20 kB 鈹?gzip:   2.23 kB
+dist/assets/AboutView-C6wpI1fp.js                                                5.48 kB 鈹?gzip:   2.78 kB
+dist/assets/ProfileInfoView-BmASmfUX.js                                          5.99 kB 鈹?gzip:   2.05 kB
+dist/assets/RegisterView-Y1hV5cMY.js                                             6.57 kB 鈹?gzip:   2.53 kB
+dist/assets/ArticleListView.vue_vue_type_script_setup_true_lang-fZcycRUQ.js      6.81 kB 鈹?gzip:   2.84 kB
+dist/assets/HomeView-D0chpxzM.js                                                 9.87 kB 鈹?gzip:   3.37 kB
+dist/assets/ArticleDetailView-D5o1f3p5.js                                       15.22 kB 鈹?gzip:   5.29 kB
+dist/assets/index-CYhiVHO2.js                                                   93.44 kB 鈹?gzip:  38.00 kB
+dist/assets/vue-BMyn3C5g.js                                                    106.47 kB 鈹?gzip:  41.39 kB
+dist/assets/markdown-D2y70BrV.js                                             1,043.51 kB 鈹?gzip: 361.16 kB
+鉁?built in 5.26s
+

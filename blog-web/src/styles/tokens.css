@@ -1,0 +1,250 @@
+/* =============================================================
+   设计令牌层 Design Tokens
+   -------------------------------------------------------------
+   全站视觉的唯一来源。修改此文件即可全局换肤。
+   前台（Tailwind）与后台（Element Plus）共享同一套变量。
+   ============================================================= */
+
+:root {
+  /* ---------- 字体 ---------- */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, sans-serif;
+  /* 展示字体：杂志刊头 / 大标题用衬线，正文保持无衬线 */
+  --font-display: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", Georgia, serif;
+  --font-mono: "SF Mono", "JetBrains Mono", Menlo, Monaco, "Cascadia Code", Consolas, monospace;
+
+  /* 字号阶梯 */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.3125rem;  /* 21px */
+  --text-2xl: 1.75rem;   /* 28px */
+  --text-3xl: 2.5rem;    /* 40px */
+  --text-4xl: 3.5rem;    /* 56px */
+
+  /* 字重 */
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* 字间距（Apple 风格的关键：大字号收紧字距） */
+  --tracking-tight: -0.03em;
+  --tracking-snug: -0.02em;
+  --tracking-normal: -0.01em;
+
+  /* 行高 */
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.8;
+
+  /* ---------- 间距 ---------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* 区块垂直间距（大留白是 Apple 风格核心） */
+  --section-gap: clamp(4rem, 10vw, 8rem);
+
+  /* ---------- 圆角（统一规范：卡片 12 / 输入框 8 / 按钮与胶囊 999） ---------- */
+  --radius-input: 8px;
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
+  --radius-pill: 999px;
+
+  /* ---------- 缓动 ---------- */
+  --ease-apple: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+
+  /* ---------- 层级 ---------- */
+  --z-base: 1;
+  --z-sticky: 100;
+  --z-header: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+
+  /* ---------- 布局 ---------- */
+  /* 1440 屏 ≈1267，1920 屏 1560（两侧各留 ~180px），小屏不小于 1120 */
+  /* 版心宽度：下限必须是绝对长度 1120px，不可写成 100%。
+     写成 clamp(100%, …) 时结果恒 ≥ 视口宽，max-width 永不生效 → 版心塌成全宽、两侧留白消失。
+     视口窄于 1120px 时 max-width 大于可用宽度会被忽略，容器仍为 100% 贴边，不会横向溢出。
+     DefaultLayout 的版心线 / 版心底色用的 max(0px, …) 已兜住负值，无需靠下限躲避。 */
+  --shell-max: clamp(1120px, 88vw, 1560px);
+  --prose-max: 760px;
+  --header-height: 52px;
+}
+
+/* =============================================================
+   亮色主题
+   ============================================================= */
+:root,
+.light {
+  color-scheme: light;
+
+  /* 背景：暖纸白，拒绝纯白的"模板感" */
+  --color-surface: #faf9f7;
+  --color-surface-elevated: #ffffff;
+  --color-surface-sunken: #f1efe9;
+  --color-surface-overlay: rgba(250, 249, 247, 0.82);
+
+  /* 文本：墨色 */
+  --color-text-primary: #1c1a17;
+  --color-text-secondary: #5d574e;
+  --color-text-tertiary: #8a8378;
+  --color-text-quaternary: #b5aea2;
+  --color-text-inverse: #faf9f7;
+
+  /* 边框与分隔线（尽可能弱化，用阴影与色差替代） */
+  --color-border: rgba(28, 26, 23, 0.09);
+  --color-border-strong: rgba(28, 26, 23, 0.16);
+  --color-divider: rgba(28, 26, 23, 0.07);
+
+  /* 主色：柚橙（呼应"简柚"，与 Apple 蓝拉开差异） */
+  --color-accent: #d95d18;
+  --color-accent-hover: #c04f10;
+  --color-accent-light: rgba(217, 93, 24, 0.09);
+
+  /* 辅助色：墨绿（用于次级强调，杂志双色系统） */
+  --color-accent-2: #2f5d50;
+  --color-accent-2-light: rgba(47, 93, 80, 0.08);
+
+  /* 语义色 */
+  --color-success: #3d8a50;
+  --color-warning: #d97706;
+  --color-danger: #d5442c;
+  --color-info: #3a7ca5;
+
+  /* 阴影：暖色基调的多层柔影 */
+  --shadow-subtle: 0 1px 2px rgba(60, 50, 35, 0.05), 0 1px 1px rgba(60, 50, 35, 0.02);
+  --shadow-card: 0 1px 2px rgba(60, 50, 35, 0.05), 0 8px 32px rgba(60, 50, 35, 0.07);
+  --shadow-lift: 0 2px 4px rgba(60, 50, 35, 0.05), 0 16px 48px rgba(60, 50, 35, 0.12);
+  --shadow-float: 0 4px 8px rgba(60, 50, 35, 0.06), 0 24px 64px rgba(60, 50, 35, 0.16);
+
+  /* 毛玻璃 */
+  --blur-header: 20px;
+  --blur-overlay: 40px;
+  --saturate-glass: 180%;
+
+  /* 代码块 */
+  --code-bg: #f4f2ec;
+  --code-border: rgba(28, 26, 23, 0.07);
+  --code-text: #33302a;
+
+  /* 骨架屏 */
+  --skeleton-from: #f0ede6;
+  --skeleton-to: #e6e2d9;
+
+  /* ---------- 深墨刊头（杂志封面区块专用） ---------- */
+  --ink-bg: #101714;
+  --ink-bg-deep: #0a0f0d;
+  --ink-text: #f4f1e8;
+  --ink-text-secondary: rgba(244, 241, 232, 0.66);
+  --ink-text-tertiary: rgba(244, 241, 232, 0.42);
+  --ink-divider: rgba(244, 241, 232, 0.14);
+  --ink-accent: #f0824a;
+  --ink-accent-soft: rgba(240, 130, 74, 0.16);
+}
+
+/* =============================================================
+   暗色主题
+   ============================================================= */
+.dark {
+  color-scheme: dark;
+
+  /* 背景 */
+  --color-surface: #000000;
+  --color-surface-elevated: #1c1c1e;
+  --color-surface-sunken: #0a0a0a;
+  --color-surface-overlay: rgba(28, 28, 30, 0.72);
+
+  /* 文本 */
+  --color-text-primary: #f5f5f7;
+  --color-text-secondary: #a1a1a6;
+  --color-text-tertiary: #86868b;
+  --color-text-quaternary: #636366;
+  --color-text-inverse: #1d1d1f;
+
+  /* 边框 */
+  --color-border: rgba(255, 255, 255, 0.10);
+  --color-border-strong: rgba(255, 255, 255, 0.18);
+  --color-divider: rgba(255, 255, 255, 0.08);
+
+  /* 主色（柚橙 · 暗色提亮） */
+  --color-accent: #f97e2b;
+  --color-accent-hover: #fb9147;
+  --color-accent-light: rgba(249, 126, 43, 0.16);
+
+  /* 辅助色：暖绿 */
+  --color-accent-2: #5da291;
+  --color-accent-2-light: rgba(93, 162, 145, 0.14);
+
+  /* 语义色 */
+  --color-success: #30d158;
+  --color-warning: #ffb340;
+  --color-danger: #ff453a;
+  --color-info: #64d2ff;
+
+  /* 阴影：暗色下改用更强的黑色阴影 + 内发光边缘 */
+  --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.5), 0 16px 48px rgba(0, 0, 0, 0.6);
+  --shadow-float: 0 4px 8px rgba(0, 0, 0, 0.6), 0 24px 64px rgba(0, 0, 0, 0.7);
+
+  /* 毛玻璃 */
+  --blur-header: 24px;
+  --blur-overlay: 40px;
+
+  /* 代码块 */
+  --code-bg: #161b22;
+  --code-border: rgba(255, 255, 255, 0.08);
+  --code-text: #e6edf3;
+
+  /* 骨架屏 */
+  --skeleton-from: #1c1c1e;
+  --skeleton-to: #2c2c2e;
+
+  /* 深墨刊头（暗色下保持更强对比） */
+  --ink-bg: #0b110e;
+  --ink-bg-deep: #050807;
+  --ink-text: #f4f1e8;
+  --ink-text-secondary: rgba(244, 241, 232, 0.62);
+  --ink-text-tertiary: rgba(244, 241, 232, 0.38);
+  --ink-divider: rgba(244, 241, 232, 0.12);
+  --ink-accent: #f59055;
+  --ink-accent-soft: rgba(245, 144, 85, 0.18);
+}
+
+/* =============================================================
+   降低动效偏好
+   ============================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

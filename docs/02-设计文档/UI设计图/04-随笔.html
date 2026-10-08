@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>随笔 — 简柚</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./design.css">
+<style>
+/* 杂志目录：大序号 + 标题 + 摘要，横向分隔 */
+.toc { max-width: 960px; margin: 0 auto; }
+.toc-item { display: grid; grid-template-columns: 110px 1fr 200px; gap: 30px; align-items: baseline;
+  padding: 34px 0; border-bottom: 1px solid var(--line); }
+.toc-item:first-of-type { border-top: 2px solid var(--ink-900); }
+.toc-no { font-family: var(--font-display); font-size: 40px; font-weight: 700; color: var(--paper-3);
+  -webkit-text-stroke: 1.2px var(--orange); letter-spacing: 2px; }
+.toc-item h3 { font-family: var(--font-display); font-size: 23px; letter-spacing: 1.5px; margin-bottom: 10px; }
+.toc-item h3:hover { color: var(--orange); }
+.toc-item .abs { font-size: 13.5px; color: var(--muted); line-height: 1.8; }
+.toc-side { text-align: right; }
+.toc-side .d { font-family: var(--font-display); font-size: 14px; color: var(--green); letter-spacing: 2px; }
+.toc-side .w { font-size: 12px; color: var(--muted); margin-top: 6px; letter-spacing: 1px; }
+.toc-side .tag { margin-top: 10px; }
+/* 期卷标语 */
+.vol { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.vol .v { font-family: var(--font-display); font-size: 14px; color: var(--muted); letter-spacing: 3px; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-in">
+    <a class="brand">简<em>柚</em></a>
+    <nav class="nav">
+      <a>首页</a><a>家</a><a>游记</a><a class="on">随笔</a><a>记录</a><a>相册</a><a>百宝箱</a><a>留言</a>
+      <span class="search">搜一搜…</span>
+    </nav>
+  </div>
+</header>
+
+<section class="masthead">
+  <div class="ghost">随笔</div>
+  <div class="wrap">
+    <div class="kicker">ESSAY · 分类 03</div>
+    <h1>想到，<em>就写下</em></h1>
+    <p class="sub">不成体系的念头、深夜的碎语、和朋友的闲聊——共 17 篇。</p>
+    <div class="rule"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap toc">
+    <div class="vol"><span class="v">目 录 · CONTENTS</span><span class="v">第 37 卷</span></div>
+
+    <a class="toc-item">
+      <span class="toc-no">01</span>
+      <div>
+        <h3>备考这件事，急不来</h3>
+        <p class="abs">图书馆五楼靠窗的位置被占了，只好坐到角落。写着写着发现，焦虑的大部分不是"不会"，而是"担心别人会"。</p>
+      </div>
+      <div class="toc-side">
+        <div class="d">二〇二六 · 九月</div>
+        <div class="w">约 1200 字 · 读完 4 分钟</div>
+        <span class="tag">随笔</span>
+      </div>
+    </a>
+
+    <a class="toc-item">
+      <span class="toc-no">02</span>
+      <div>
+        <h3>食堂三楼的麻辣香锅</h3>
+        <p class="abs">一份微辣，两碗米饭，和室友聊到阿姨擦桌子。话题从课程设计漂到毕业以后，谁也没给结论。</p>
+      </div>
+      <div class="toc-side">
+        <div class="d">二〇二六 · 八月</div>
+        <div class="w">约 900 字 · 读完 3 分钟</div>
+        <span class="tag">随笔</span>
+      </div>
+    </a>
+
+    <a class="toc-item">
+      <span class="toc-no">03</span>
+      <div>
+        <h3>暑假留校的一周</h3>
+        <p class="abs">校园空得能听见风扇声。把宿舍搬到五楼，从此每天的固定节目是傍晚的云。</p>
+      </div>
+      <div class="toc-side">
+        <div class="d">二〇二六 · 七月</div>
+        <div class="w">约 1500 字 · 读完 5 分钟</div>
+        <span class="tag">随笔</span>
+      </div>
+    </a>
+
+    <a class="toc-item">
+      <span class="toc-no">04</span>
+      <div>
+        <h3>给一年前的自己回信</h3>
+        <p class="abs">翻到去年九月写的"学期计划"，七条只完成两条。但计划外的三件事，好像更值。</p>
+      </div>
+      <div class="toc-side">
+        <div class="d">二〇二六 · 六月</div>
+        <div class="w">约 1100 字 · 读完 4 分钟</div>
+        <span class="tag">随笔</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-in">
+    <div class="fb">简柚 · 记录路程</div>
+    <small>© 2026 jianyou.blog · 湘ICP备xxxxxxxx号</small>
+  </div>
+</footer>
+
+</body>
+</html>

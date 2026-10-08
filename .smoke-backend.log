@@ -1,0 +1,42 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.5)
+
+2026-10-07T11:03:40.929+08:00  INFO 9112 --- [blog-backend] [           main] com.jianyou.blog.BlogApplication         : Starting BlogApplication v1.0.0 using Java 21.0.9 with PID 9112 (D:\quanbudaima\bi_ye_she_ji\blog-backend\target\blog-backend.jar started by 简 in D:\quanbudaima\bi_ye_she_ji\blog-backend)
+2026-10-07T11:03:40.931+08:00  INFO 9112 --- [blog-backend] [           main] com.jianyou.blog.BlogApplication         : No active profile set, falling back to 1 default profile: "default"
+2026-10-07T11:03:41.809+08:00  INFO 9112 --- [blog-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-10-07T11:03:41.811+08:00  INFO 9112 --- [blog-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-10-07T11:03:41.846+08:00  INFO 9112 --- [blog-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 16 ms. Found 0 Redis repository interfaces.
+2026-10-07T11:03:42.522+08:00  INFO 9112 --- [blog-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-10-07T11:03:42.540+08:00  INFO 9112 --- [blog-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-07T11:03:42.541+08:00  INFO 9112 --- [blog-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2026-10-07T11:03:42.581+08:00  INFO 9112 --- [blog-backend] [           main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2026-10-07T11:03:42.582+08:00  INFO 9112 --- [blog-backend] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1589 ms
+2026-10-07T11:03:43.120+08:00  INFO 9112 --- [blog-backend] [           main] com.jianyou.blog.util.ProvinceResolver   : ip2region xdb 载入成功: ip2region/ip2region_v4.xdb (11122036 bytes)
+2026-10-07T11:03:43.194+08:00  WARN 9112 --- [blog-backend] [           main] c.b.m.core.metadata.TableInfoHelper      : Can not find table primary key in Class: "com.jianyou.blog.entity.ArticleTag".
+2026-10-07T11:03:43.195+08:00  WARN 9112 --- [blog-backend] [           main] c.b.m.core.injector.DefaultSqlInjector   : class com.jianyou.blog.entity.ArticleTag ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2026-10-07T11:03:44.603+08:00  WARN 9112 --- [blog-backend] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-10-07T11:03:44.625+08:00  INFO 9112 --- [blog-backend] [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-10-07T11:03:44.645+08:00 ERROR 9112 --- [blog-backend] [           main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8082 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8082 or configure this application to listen on another port.
+
+ianyou.blog.config.DataLoader       : 博主账号已初始化（13800000001 / jianyou@local.dev），跳过

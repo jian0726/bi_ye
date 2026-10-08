@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>topic-03</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1500px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">graph TB
+    ROOT["简柚个人博客系统"]
+
+    ROOT --&gt; P["博客前台"]
+    ROOT --&gt; A["管理后台"]
+
+    P --&gt; P1["用户中心"]
+    P --&gt; P2["内容浏览"]
+    P --&gt; P3["互动交流"]
+    P --&gt; P4["个人角落"]
+
+    P1 --&gt; P11["手机号注册"]
+    P1 --&gt; P12["邮箱注册"]
+    P1 --&gt; P13["登录 / 退出"]
+    P1 --&gt; P14["个人中心（资料 / 头像 / 改密）"]
+    P1 --&gt; P15["我的收藏"]
+
+    P2 --&gt; P21["首页（墨色刊头 + 时间线）"]
+    P2 --&gt; P22["文章详情"]
+    P2 --&gt; P23["分类浏览（记录 / 游记 / 随笔）"]
+    P2 --&gt; P24["标签浏览"]
+    P2 --&gt; P25["归档时间线"]
+    P2 --&gt; P26["关键词检索（标题 + 摘要）"]
+
+    P3 --&gt; P31["文章点赞（需登录）"]
+    P3 --&gt; P32["文章收藏（需登录）"]
+    P3 --&gt; P33["留言板（文字雨）"]
+    P3 --&gt; P34["友链申请"]
+
+    P4 --&gt; P41["相册（瀑布流）"]
+    P4 --&gt; P42["百宝箱（工具 + 友链）"]
+    P4 --&gt; P43["背景音乐"]
+    P4 --&gt; P44["明暗主题切换"]
+
+    A --&gt; A1["内容管理"]
+    A --&gt; A2["互动管理"]
+    A --&gt; A3["系统与资源"]
+
+    A1 --&gt; A11["文章增删改查"]
+    A1 --&gt; A12["草稿 / 发布 / 下线"]
+    A1 --&gt; A13["置顶标记"]
+    A1 --&gt; A14["分类管理"]
+    A1 --&gt; A15["标签管理"]
+
+    A2 --&gt; A21["留言管理"]
+    A2 --&gt; A22["友链审核"]
+    A2 --&gt; A23["用户管理"]
+
+    A3 --&gt; A31["数据看板"]
+    A3 --&gt; A32["站点设置"]
+    A3 --&gt; A33["相册管理"]
+    A3 --&gt; A34["音乐管理"]
+    A3 --&gt; A35["上传资源管理"]</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>
