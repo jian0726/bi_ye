@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>首页 — 简柚</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./design.css">
+<style>
+/* 首页顶部导航反白（overInk） */
+.header.ink { background: transparent; border-bottom: 1px solid rgba(244,241,234,.12); position: absolute; left:0; right:0; }
+.header.ink .brand, .header.ink .nav a { color: rgba(244,241,234,.85); }
+.header.ink .nav a.on { color: #f0a06b; }
+.header.ink .nav .search { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); color: rgba(244,241,234,.7); }
+
+/* MagazineHero 深墨首屏 */
+.hero {
+  min-height: 100vh; position: relative; overflow: hidden;
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(47,93,80,.35), transparent 60%),
+    radial-gradient(900px 500px at 10% 110%, rgba(217,93,24,.12), transparent 55%),
+    linear-gradient(165deg, #101714 0%, #16211c 55%, #1a2620 100%);
+  color: #f4f1ea; display: flex; align-items: center;
+}
+.hero .ghost {
+  position: absolute; right: 7%; top: 50%; transform: translateY(-50%);
+  writing-mode: vertical-rl; font-family: var(--font-display);
+  font-size: 200px; font-weight: 700; letter-spacing: 48px;
+  color: rgba(244,241,234,.055); user-select: none;
+}
+.hero-in { max-width: 1200px; margin: 0 auto; padding: 0 48px; width: 100%; }
+.hero .kicker { font-size: 13px; letter-spacing: 8px; color: rgba(244,241,234,.5); margin-bottom: 30px; }
+.hero h1 { font-family: var(--font-display); font-size: 84px; font-weight: 700; letter-spacing: 10px; line-height: 1.28; }
+.hero h1 em { font-style: normal; color: var(--orange); }
+.hero .sub { margin-top: 30px; font-size: 16px; letter-spacing: 3px; color: rgba(244,241,234,.62); }
+.hero .rule { width: 64px; height: 3px; background: var(--orange); margin-top: 34px; border-radius: 2px; }
+.hero .down {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+  font-size: 12px; letter-spacing: 4px; color: rgba(244,241,234,.45);
+}
+
+/* 最近落笔 横滑卡片带 */
+.strip { display: flex; gap: 22px; overflow-x: auto; padding-bottom: 14px; }
+.strip::-webkit-scrollbar { height: 8px; }
+.strip::-webkit-scrollbar-thumb { background: var(--paper-3); border-radius: 8px; }
+.card { min-width: 292px; max-width: 292px; background: #fff; border-radius: 16px; overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 10px 30px rgba(38,36,31,.06); }
+.card .cover { height: 168px; border-radius: 0; }
+.card .cover .cv-title { font-size: 21px; }
+.card .cb { padding: 16px 18px 18px; }
+.card .cb h3 { font-size: 16px; font-weight: 600; line-height: 1.5; margin-bottom: 8px; }
+.card .cb .meta { display: flex; justify-content: space-between; }
+
+/* 这一篇最长 编辑式排版 */
+.editorial { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; }
+.editorial .cover { height: 380px; }
+.editorial .cover .cv-title { font-size: 34px; padding: 26px 28px; }
+.editorial .e-no { font-family: var(--font-display); color: var(--orange); font-size: 14px; letter-spacing: 3px; }
+.editorial h2 { font-family: var(--font-display); font-size: 34px; letter-spacing: 2px; margin: 14px 0 18px; }
+.editorial p { color: #55524a; margin-bottom: 14px; }
+.editorial .more { display: inline-block; margin-top: 10px; font-size: 13.5px; color: var(--orange); letter-spacing: 2px; border-bottom: 1px solid var(--orange); padding-bottom: 3px; }
+
+/* 时间轴列表 */
+.timeline { position: relative; padding-left: 36px; }
+.timeline::before { content: ''; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 2px; background: var(--line); }
+.tl-month { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--green); margin: 34px 0 18px; }
+.tl-month:first-child { margin-top: 0; }
+.tl-month small { font-size: 12px; color: var(--muted); letter-spacing: 2px; margin-left: 12px; font-family: var(--font-body); font-weight: 400; }
+.tl-item { position: relative; display: flex; gap: 22px; align-items: baseline; padding: 11px 0; border-bottom: 1px dashed var(--line); }
+.tl-item::before { content: ''; position: absolute; left: -33px; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
+.tl-item .d { font-family: var(--font-display); font-size: 13px; color: var(--muted); min-width: 74px; letter-spacing: 1px; }
+.tl-item .t { font-size: 15.5px; font-weight: 500; }
+.tl-item .c { margin-left: auto; }
+</style>
+</head>
+<body>
+
+<!-- 顶部导航：8 项纯文字 -->
+<header class="header ink">
+  <div class="header-in">
+    <a class="brand">简<em>柚</em></a>
+    <nav class="nav">
+      <a class="on">首页</a><a>家</a><a>游记</a><a>随笔</a><a>记录</a><a>相册</a><a>百宝箱</a><a>留言</a>
+      <span class="search">搜一搜…</span>
+    </nav>
+  </div>
+</header>
+
+<!-- MagazineHero 深墨首屏 -->
+<section class="hero">
+  <div class="ghost">简柚</div>
+  <div class="hero-in">
+    <div class="kicker">JIANYOU · 第 37 卷 · 二〇二六年九月</div>
+    <h1>慢慢写，<br>慢慢<em>长</em>。</h1>
+    <p class="sub">这里是我的成长记录本，把学过的、走过的、想到的，按月份装订起来。</p>
+    <div class="rule"></div>
+  </div>
+  <div class="down">往下翻 ↓</div>
+</section>
+
+<!-- 最近落笔：横滑卡片带 -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">壹</span>
+      <span class="sec-title">最近落笔</span>
+      <span class="sec-note">← 滚轮横滑 / 按住拖动 →</span>
+    </div>
+    <div class="strip">
+      <a class="card"><div class="cover cv-1"><span class="cv-title">秋天的第一场夜骑</span></div>
+        <div class="cb"><h3>沿着湘江骑到凌晨的橘子洲</h3><div class="meta"><span class="tag">游记</span><span>09-14</span></div></div></a>
+      <a class="card"><div class="cover cv-2"><span class="cv-title">Spring Security 摸清了</span></div>
+        <div class="cb"><h3>把 JWT 双令牌重写了一遍才懂</h3><div class="meta"><span class="tag o">记录</span><span>09-11</span></div></div></a>
+      <a class="card"><div class="cover cv-3"><span class="cv-title">深夜自习室</span></div>
+        <div class="cb"><h3>备考这件事，急不来</h3><div class="meta"><span class="tag">随笔</span><span>09-06</span></div></div></a>
+      <a class="card"><div class="cover cv-4"><span class="cv-title">相机里的八月</span></div>
+        <div class="cb"><h3>三十七张照片和三个傍晚</h3><div class="meta"><span class="tag">相册</span><span>08-30</span></div></div></a>
+      <a class="card"><div class="cover cv-1"><span class="cv-title">食堂三楼</span></div>
+        <div class="cb"><h3>一份麻辣香锅引发的闲聊</h3><div class="meta"><span class="tag">随笔</span><span>08-24</span></div></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- 篇幅最长的一篇：编辑式排版 -->
+<section class="section" style="background: var(--paper-2);">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">贰</span>
+      <span class="sec-title">篇幅最长的一篇</span>
+      <span class="sec-note">写于 08-17 · 约 6400 字</span>
+    </div>
+    <div class="editorial">
+      <a class="cover cv-1"><span class="cv-title">从零搭一套<br>博客后台</span></a>
+      <div>
+        <div class="e-no">NO.036 / 记录</div>
+        <h2>从零搭一套博客后台，我踩过的十二个坑</h2>
+        <p>从第一天配环境开始，到 Nginx 转发调通的那个晚上，前后差不多三周。这篇把过程里踩过的坑按时间顺序记下来——每一段都附上当天的报错截图和当时的想法。</p>
+        <p>写完发现，所谓成长，大概就是把"报错 → 搜索 → 试 → 再报错"这个循环，跑得一次比一次快。</p>
+        <a class="more">按时间翻这一篇 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 按月份装订：时间轴 -->
+<section class="section">
+  <div class="wrap" style="max-width: 880px;">
+    <div class="sec-head">
+      <span class="sec-no">叁</span>
+      <span class="sec-title">按月份装订</span>
+      <span class="sec-note">共 42 篇 · 写字 18.6 万</span>
+    </div>
+    <div class="timeline">
+      <div class="tl-month">九月<small>SEPTEMBER · 6 篇</small></div>
+      <a class="tl-item"><span class="d">09-14</span><span class="t">沿着湘江骑到凌晨的橘子洲</span><span class="c tag">游记</span></a>
+      <a class="tl-item"><span class="d">09-11</span><span class="t">把 JWT 双令牌重写了一遍才懂</span><span class="c tag o">记录</span></a>
+      <a class="tl-item"><span class="d">09-06</span><span class="t">备考这件事，急不来</span><span class="c tag">随笔</span></a>
+      <div class="tl-month">八月<small>AUGUST · 9 篇</small></div>
+      <a class="tl-item"><span class="d">08-30</span><span class="t">三十七张照片和三个傍晚</span><span class="c tag">相册</span></a>
+      <a class="tl-item"><span class="d">08-17</span><span class="t">从零搭一套博客后台，我踩过的十二个坑</span><span class="c tag o">记录</span></a>
+      <a class="tl-item"><span class="d">08-09</span><span class="t">岳麓山看日出，四点半的闹钟</span><span class="c tag">游记</span></a>
+      <div class="tl-month">七月<small>JULY · 7 篇</small></div>
+      <a class="tl-item"><span class="d">07-28</span><span class="t">第一次给项目写 Dockerfile</span><span class="c tag o">记录</span></a>
+      <a class="tl-item"><span class="d">07-12</span><span class="t">暑假留校的一周</span><span class="c tag">随笔</span></a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-in">
+    <div class="fb">简柚 · 记录路程</div>
+    <small>© 2026 jianyou.blog · 湘ICP备xxxxxxxx号 · 由 Spring Boot + Vue 3 驱动</small>
+  </div>
+</footer>
+
+</body>
+</html>

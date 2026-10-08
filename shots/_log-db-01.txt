@@ -1,0 +1,44 @@
+>>> open file:///D:/quanbudaima/bi_ye_she_ji/shots/_figs/html/db-01.html
+[exit null] spawnErr: spawnSync D:/node.js/nodejs/node.exe EBUSY
+
+
+
+>>> set viewport 2000 900
+[exit null] spawnErr: spawnSync D:/node.js/nodejs/node.exe EBUSY
+
+
+
+>>> wait 5000
+[exit null] spawnErr: spawnSync D:/node.js/nodejs/node.exe EBUSY
+
+
+
+>>> eval JSON.stringify({
+  href: location.href,
+  title: document.title,
+  appLen: (document.getElementById('app')||{innerHTML:''}).innerHTML.length,
+  mainLen: document.querySelector('main') ? document.querySelector('main').innerHTML.length : -1,
+  mainHead: document.querySelector('main') ? document.querySelector('main').innerHTML.slice(0,500) : 'NOMA',
+  reveal: document.querySelectorAll('.reveal').length,
+  visible: document.querySelectorAll('.reveal.is-visible').length,
+  opacity0: Array.from(document.querySelectorAll('.reveal')).filter(e=>getComputedStyle(e).opacity==='0').length,
+  h1: document.querySelector('h1') ? document.querySelector('h1').textContent.trim() : 'none',
+  sections: document.querySelectorAll('section').length
+})
+[exit null] spawnErr: spawnSync D:/node.js/nodejs/node.exe EBUSY
+
+
+
+>>> errors
+[exit null] spawnErr: spawnSync D:/node.js/nodejs/node.exe EBUSY
+
+
+
+>>> console
+[exit null] spawnErr: spawnSync D:/node.js/nodejs/node.exe EBUSY
+
+
+
+>>> screenshot D:\quanbudaima\bi_ye_she_ji\shots\db-01.png --full
+[exit null] spawnErr: spawnSync D:/node.js/nodejs/node.exe EBUSY
+

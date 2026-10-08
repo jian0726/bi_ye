@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>arch-01</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">graph TB
+    subgraph Client["客户端层（单 SPA：blog-web）"]
+        A1["前台路由 / DefaultLayout&lt;br/&gt;Vue3 + Vite + TS + Tailwind"]
+        A2["后台路由 /admin · AdminLayout&lt;br/&gt;Element Plus"]
+    end
+
+    subgraph Gateway["接入层"]
+        B1["Nginx&lt;br/&gt;反向代理 / 静态资源 / HTTPS / gzip"]
+    end
+
+    subgraph App["应用服务层 — Spring Boot 3.5（JDK 21）"]
+        C1["Controller 接口层&lt;br/&gt;portal / admin / auth"]
+        C2["Service 业务层&lt;br/&gt;业务编排 · 事务控制"]
+        C3["Mapper 持久层&lt;br/&gt;MyBatis-Plus"]
+        C4["拦截器&lt;br/&gt;AuthInterceptor 鉴权 · VisitLogInterceptor 埋点"]
+        C5["全局异常处理&lt;br/&gt;GlobalExceptionHandler"]
+    end
+
+    subgraph Data["数据存储层"]
+        D1[("MySQL 8.0&lt;br/&gt;业务数据 · 唯一索引去重")]
+        D2[("Redis 7.x&lt;br/&gt;找回密码验证码")]
+        D3[("MinIO&lt;br/&gt;图片 / 音频对象存储")]
+    end
+
+    A1 --&gt; B1
+    A2 --&gt; B1
+    B1 --&gt; C1
+    C1 --&gt; C2
+    C2 --&gt; C3
+    C1 --&gt; C4
+    C2 --&gt; C5
+    C3 --&gt; D1
+    C2 --&gt; D2
+    C2 --&gt; D3</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

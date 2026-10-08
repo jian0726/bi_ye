@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>topic-02</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">graph LR
+    Dev["开发者&lt;br/&gt;Git Push"] --&gt; GH["GitHub&lt;br/&gt;代码仓库"]
+    GH --&gt;|Webhook| JK["Jenkins&lt;br/&gt;CI/CD"]
+    JK --&gt;|1. Maven 构建| JAR["可执行 JAR"]
+    JK --&gt;|2. 构建镜像| REG["私有仓库&lt;br/&gt;registry:5000"]
+    REG --&gt;|3. 拉取镜像| DC["Docker Compose&lt;br/&gt;生产环境"]
+    DC --&gt; NG["Nginx"]
+    DC --&gt; APP["blog-backend"]
+    DC --&gt; WEB["blog-web&lt;br/&gt;静态资源"]
+    DC --&gt; DB["MySQL"]
+    DC --&gt; RD["Redis"]
+    DC --&gt; MO["MinIO"]
+    NG --&gt; USER["用户浏览器"]</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

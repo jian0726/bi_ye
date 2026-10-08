@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>flow-03</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">flowchart TD
+    S(["开始"]) --&gt; A["打开注册页"]
+    A --&gt; B["填写：手机号或邮箱（至少一项）+ 昵称 + 密码"]
+    B --&gt; C{"前端格式校验"}
+    C --&gt;|格式错误| C1["实时提示格式不正确"] --&gt; B
+    C --&gt;|通过| D["提交注册请求"]
+    D --&gt; E{"至少填写一项？"}
+    E --&gt;|否| E1["400 请填写手机号或邮箱"] --&gt; B
+    E --&gt;|是| F{"手机号已被注册？"}
+    F --&gt;|是| F1["400 该手机号已被注册"] --&gt; B
+    F --&gt;|否| G{"邮箱已被注册？"}
+    G --&gt;|是| G1["400 该邮箱已被注册"] --&gt; B
+    G --&gt;|否| H["BCrypt 加密密码"]
+    H --&gt; I["写入 t_user&lt;br/&gt;role=USER, status=1"]
+    I --&gt; J["签发 JWT&lt;br/&gt;subject=userId, claim=role"]
+    J --&gt; K["返回 token + 用户信息"]
+    K --&gt; L(["自动登录并进入首页"])</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

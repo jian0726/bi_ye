@@ -1,0 +1,191 @@
+[
+  {
+    "name": "topic-01",
+    "doc": "topic",
+    "head": "2.1 总体架构",
+    "width": 1500,
+    "lines": 34
+  },
+  {
+    "name": "topic-02",
+    "doc": "topic",
+    "head": "2.3 部署架构",
+    "width": 1200,
+    "lines": 13
+  },
+  {
+    "name": "topic-03",
+    "doc": "topic",
+    "head": "5.1 功能结构总览",
+    "width": 1500,
+    "lines": 53
+  },
+  {
+    "name": "req-01",
+    "doc": "req",
+    "head": "2.4 角色用例图",
+    "width": 1200,
+    "lines": 43
+  },
+  {
+    "name": "arch-01",
+    "doc": "arch",
+    "head": "一、总体架构",
+    "width": 1200,
+    "lines": 34
+  },
+  {
+    "name": "arch-02",
+    "doc": "arch",
+    "head": "四、部署架构（Docker Compose + Jenkins）",
+    "width": 1200,
+    "lines": 16
+  },
+  {
+    "name": "db-01",
+    "doc": "db",
+    "head": "二、实体关系图（ER 图）",
+    "width": 2000,
+    "lines": 161
+  },
+  {
+    "name": "db-02",
+    "doc": "db",
+    "head": "4.1 注册、登录与鉴权",
+    "width": 1200,
+    "lines": 16
+  },
+  {
+    "name": "db-03",
+    "doc": "db",
+    "head": "4.2 点赞 / 收藏（唯一索引 + 计数双写）",
+    "width": 1200,
+    "lines": 11
+  },
+  {
+    "name": "db-04",
+    "doc": "db",
+    "head": "4.3 浏览量计数（独立访客去重）",
+    "width": 1200,
+    "lines": 8
+  },
+  {
+    "name": "db-05",
+    "doc": "db",
+    "head": "4.4 访问埋点与省份统计",
+    "width": 1200,
+    "lines": 6
+  },
+  {
+    "name": "db-06",
+    "doc": "db",
+    "head": "4.5 图片与音频上传",
+    "width": 1200,
+    "lines": 10
+  },
+  {
+    "name": "flow-01",
+    "doc": "flow",
+    "head": "1.1 总体功能结构",
+    "width": 1500,
+    "lines": 57
+  },
+  {
+    "name": "flow-02",
+    "doc": "flow",
+    "head": "1.2 后端技术分层结构图",
+    "width": 1500,
+    "lines": 38
+  },
+  {
+    "name": "flow-03",
+    "doc": "flow",
+    "head": "2.1 用户注册流程（手机号 / 邮箱，至少填一项）",
+    "width": 1200,
+    "lines": 17
+  },
+  {
+    "name": "flow-04",
+    "doc": "flow",
+    "head": "2.2 用户登录流程",
+    "width": 1200,
+    "lines": 17
+  },
+  {
+    "name": "flow-05",
+    "doc": "flow",
+    "head": "2.3 博客前台访问流程",
+    "width": 1200,
+    "lines": 22
+  },
+  {
+    "name": "flow-06",
+    "doc": "flow",
+    "head": "2.4 文章发布流程（草稿 / 发布 / 隐藏）",
+    "width": 1200,
+    "lines": 20
+  },
+  {
+    "name": "flow-07",
+    "doc": "flow",
+    "head": "2.5 点赞 / 收藏流程（账号维度）",
+    "width": 1200,
+    "lines": 19
+  },
+  {
+    "name": "flow-08",
+    "doc": "flow",
+    "head": "2.6 留言板（文字雨）流程",
+    "width": 1200,
+    "lines": 16
+  },
+  {
+    "name": "flow-09",
+    "doc": "flow",
+    "head": "2.7 数据看板统计流程",
+    "width": 1200,
+    "lines": 17
+  },
+  {
+    "name": "flow-10",
+    "doc": "flow",
+    "head": "2.8 后台权限校验流程",
+    "width": 1200,
+    "lines": 18
+  },
+  {
+    "name": "flow-11",
+    "doc": "flow",
+    "head": "2.10 CI/CD 自动化部署流程",
+    "width": 1200,
+    "lines": 19
+  },
+  {
+    "name": "flow-12",
+    "doc": "flow",
+    "head": "三、系统用例图",
+    "width": 1500,
+    "lines": 66
+  },
+  {
+    "name": "flow-13",
+    "doc": "flow",
+    "head": "4.1 文章状态流转",
+    "width": 1200,
+    "lines": 10
+  },
+  {
+    "name": "flow-14",
+    "doc": "flow",
+    "head": "4.2 用户状态流转",
+    "width": 1200,
+    "lines": 5
+  },
+  {
+    "name": "flow-15",
+    "doc": "flow",
+    "head": "4.3 点赞记录流转（按账号）",
+    "width": 1200,
+    "lines": 7
+  }
+]

@@ -1,0 +1,13 @@
+*************************** 1. row ***************************
+       Table: t_message
+Create Table: CREATE TABLE `t_message` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '留言ID',
+  `user_id` bigint DEFAULT NULL COMMENT '留言人，游客为 NULL',
+  `nickname` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '游客昵称',
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '游客邮箱（不回显）',
+  `content` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '留言内容',
+  `ip_location` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'IP属地',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_create` (`create_time`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='留言表'

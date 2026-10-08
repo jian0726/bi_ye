@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>文章详情 — 简柚</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./design.css">
+<style>
+/* 简洁墨头：文章信息型 */
+.masthead.slim { padding: 76px 0 64px; }
+.masthead.slim .meta-row { display: flex; gap: 18px; align-items: center; margin-top: 24px; font-size: 13px; color: rgba(244,241,234,.55); letter-spacing: 2px; }
+.masthead.slim .meta-row .dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(244,241,234,.4); }
+/* 正文 + 目录双栏 */
+.detail { display: grid; grid-template-columns: 1fr 220px; gap: 56px; max-width: 1060px; margin: 0 auto; padding: 60px 48px; }
+.prose { max-width: 720px; }
+.prose h2 { font-family: var(--font-display); font-size: 24px; letter-spacing: 1px; margin: 40px 0 16px; padding-left: 14px; border-left: 4px solid var(--orange); }
+.prose h3 { font-family: var(--font-display); font-size: 18px; margin: 28px 0 12px; }
+.prose p { color: #3c3a33; margin-bottom: 14px; font-size: 15px; }
+.prose blockquote { background: var(--paper-2); border-left: 3px solid var(--green); border-radius: 0 10px 10px 0; padding: 14px 20px; color: #55524a; font-size: 14px; margin: 18px 0; }
+.prose code.inline { background: var(--paper-2); border-radius: 6px; padding: 2px 7px; font-size: 13px; color: var(--orange); }
+.prose pre { background: #16211c; color: #d9e2dc; border-radius: 14px; padding: 22px 24px; font-size: 13px; line-height: 1.75; overflow-x: auto; margin: 20px 0; font-family: 'JetBrains Mono', Consolas, monospace; }
+.prose pre .k { color: #f0a06b; } .prose pre .s { color: #9ecfa8; } .prose pre .c { color: #5e7268; }
+.prose ul { padding-left: 22px; margin-bottom: 14px; color: #3c3a33; }
+/* 操作条 */
+.acts { display: flex; gap: 14px; margin: 44px 0 8px; }
+.acts a { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 10px 24px; font-size: 14px; letter-spacing: 1px; }
+.acts a.hot { background: var(--orange); border-color: var(--orange); color: #fff; }
+/* 目录 */
+.toc-box { position: sticky; top: 90px; align-self: start; font-size: 13px; }
+.toc-box .tt { font-family: var(--font-display); font-weight: 700; letter-spacing: 2px; margin-bottom: 14px; color: var(--ink-900); }
+.toc-box a { display: block; color: var(--muted); padding: 7px 0 7px 14px; border-left: 2px solid var(--line); }
+.toc-box a.on { color: var(--orange); border-left-color: var(--orange); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-in">
+    <a class="brand">简<em>柚</em></a>
+    <nav class="nav">
+      <a>首页</a><a>家</a><a>游记</a><a>随笔</a><a class="on">记录</a><a>相册</a><a>百宝箱</a><a>留言</a>
+      <span class="search">搜一搜…</span>
+    </nav>
+  </div>
+</header>
+
+<section class="masthead slim">
+  <div class="wrap">
+    <div class="kicker">NO.037 · 记录</div>
+    <h1 style="font-size: 44px;">把 JWT 双令牌重写<br>了一遍才懂</h1>
+    <div class="meta-row"><span>2026-09-11</span><span class="dot"></span><span>约 3200 字 · 读完 11 分钟</span><span class="dot"></span><span>1.2k 次翻看</span></div>
+  </div>
+</section>
+
+<div class="detail">
+  <article class="prose">
+    <p>登录鉴权这块，我之前一直是"能跑就行"。直到答辩预演被问"Access Token 过期了怎么办"，才认真把双令牌方案完整写了一遍。这篇按我的理解顺序记录。</p>
+
+    <h2>为什么要两个 Token</h2>
+    <p>单个 Token 的矛盾在于：<code class="inline">有效期长</code>则被盗风险高，<code class="inline">有效期短</code>则用户频繁重新登录。双令牌把"身份凭证"和"续期凭证"分开——</p>
+    <ul>
+      <li><b>Access Token</b>：有效期 2 小时，随每个请求携带，服务端无状态校验；</li>
+      <li><b>Refresh Token</b>：有效期 7 天，只在续期接口出现，存 Redis 可随时吊销。</li>
+    </ul>
+    <blockquote>一句话：Access 管"现在能不能进"，Refresh 管"还能不能续"。分工不同，安全边界就清晰了。</blockquote>
+
+    <h2>续期流程</h2>
+    <p>前端在 Axios 响应拦截器里捕获 401，静默调用 <code class="inline">/api/portal/auth/refresh</code>，拿到新 Access 后重放原请求。期间的其他请求挂起，避免并发刷新导致多次续期。</p>
+
+    <h3>退出登录怎么作废 Token</h3>
+    <p>JWT 本身无法主动作废，所以用 Redis 黑名单补位：退出时把 Access Token 的 jti 写入黑名单，TTL 设为该 Token 的剩余有效期——到期后黑名单条目自动消失，不占内存。</p>
+
+    <pre><span class="c">// JwtAuthenticationFilter 中每次请求先查黑名单</span>
+<span class="k">if</span> (redisTemplate.hasKey(BLACKLIST + jti)) {
+    <span class="k">throw new</span> BusinessException(<span class="s">401</span>, <span class="s">"登录已失效"</span>);
+}</pre>
+
+    <h2>小结</h2>
+    <p>重写一遍的最大收获：安全方案不是"加一个中间件"就完事，而是一整套<b>签发 → 携带 → 校验 → 续期 → 作废</b>的生命周期设计。生命周期想清楚了，代码只是翻译。</p>
+
+    <div class="acts">
+      <a class="hot">♥ 有收获 · 56</a>
+      <a>☆ 收藏</a>
+      <a>写留言</a>
+    </div>
+  </article>
+
+  <aside class="toc-box">
+    <div class="tt">本篇目录</div>
+    <a class="on">为什么要两个 Token</a>
+    <a>续期流程</a>
+    <a>退出登录怎么作废 Token</a>
+    <a>小结</a>
+  </aside>
+</div>
+
+<footer class="footer">
+  <div class="footer-in">
+    <div class="fb">简柚 · 记录路程</div>
+    <small>© 2026 jianyou.blog · 湘ICP备xxxxxxxx号</small>
+  </div>
+</footer>
+
+</body>
+</html>

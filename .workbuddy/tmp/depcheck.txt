@@ -1,0 +1,6 @@
+﻿node_modules entries: 138
+vite: True
+tailwindcss: True
+vue: True
+markdown-it: True
+highlight.js: True

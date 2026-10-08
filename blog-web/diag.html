@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>首页 · 简柚</title>
+  <script type="module" crossorigin src="/src/main.ts"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="diag" style="position:fixed;bottom:0;left:0;z-index:99999;font:12px monospace;background:#000;color:#0f0;padding:4px;white-space:pre"></div>
+  <script>
+    window.__errs = [];
+    window.addEventListener('error', function (e) {
+      window.__errs.push('ERR:' + (e.message || e.error));
+    });
+    window.addEventListener('unhandledrejection', function (e) {
+      window.__errs.push('REJ:' + (e.reason && e.reason.message ? e.reason.message : String(e.reason)));
+    });
+    var origErr = console.error;
+    console.error = function () {
+      window.__errs.push('CE:' + Array.prototype.map.call(arguments, function (a) {
+        return a && a.message ? a.message + '\n' + (a.stack || '') : String(a);
+      }).join(' | '));
+      origErr.apply(console, arguments);
+    };
+    var origWarn = console.warn;
+    console.warn = function () {
+      window.__errs.push('CW:' + Array.prototype.map.call(arguments, String).join(' | '));
+      origWarn.apply(console, arguments);
+    };
+    setTimeout(function () {
+      try {
+        var m = document.querySelector('main');
+        document.getElementById('diag').textContent = JSON.stringify({
+          errs: window.__errs,
+          mainLen: m ? m.innerHTML.length : -1,
+          mainHead: m ? m.innerHTML.slice(0, 700) : 'NOMA',
+          reveal: document.querySelectorAll('.reveal').length,
+          h1: document.querySelector('h1') ? document.querySelector('h1').textContent : 'none',
+          appHtmlLen: document.getElementById('app').innerHTML.length
+        }, null, 2);
+      } catch (e) {
+        document.getElementById('diag').textContent = 'DIAGFAIL:' + e.message;
+      }
+    }, 3500);
+  </script>
+</body>
+</html>

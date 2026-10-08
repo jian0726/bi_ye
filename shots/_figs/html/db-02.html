@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>db-02</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">flowchart TD
+    A["提交手机号 / 邮箱 + 昵称 + 密码"] --&gt; B{"至少填一项？"}
+    B --&gt;|否| B1["400 请填写手机号或邮箱"]
+    B --&gt;|是| C{"账号已存在？"}
+    C --&gt;|是| C1["400 该手机号/邮箱已被注册"]
+    C --&gt;|否| D["BCrypt 加密密码"]
+    D --&gt; E["写入 t_user（role=USER，status=1）"]
+    E --&gt; F["签发 JWT（subject=userId，claim role）"]
+    F --&gt; G["返回 token + 用户信息（自动登录）"]
+
+    H["提交 account + 密码"] --&gt; I["按 phone OR email 匹配 t_user"]
+    I --&gt; J{"用户存在且密码匹配？"}
+    J --&gt;|否| J1["400 手机号/邮箱或密码错误"]
+    J --&gt;|是| K{"status = 0 ？"}
+    K --&gt;|是| K1["403 账号已被禁用"]
+    K --&gt;|否| F</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>

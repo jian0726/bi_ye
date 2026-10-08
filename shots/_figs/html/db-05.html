@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>db-05</title>
+<style>
+  html,body{margin:0;padding:20px;background:#ffffff;width:1200px;box-sizing:border-box;}
+  .mermaid{font-family:"Microsoft YaHei","SimSun",sans-serif;}
+</style>
+</head>
+<body>
+<pre class="mermaid">flowchart LR
+    A["任意前台页面请求"] --&gt; B["拦截器采集 IP / path / UA"]
+    B --&gt; C["解析省份：本机与内网记为「本地」"]
+    C --&gt; D["写入 t_visit_log"]
+    D --&gt; E["仪表盘按 create_time 统计今日访问量（idx_visit_time）"]
+    D --&gt; F["按 province 分组统计今日各省分布（idx_visit_province）"]</pre>
+<script src="../mermaid.min.js"></script>
+<script>
+mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose',
+  flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis'},
+  er:{useMaxWidth:true},
+  themeVariables:{fontFamily:'"Microsoft YaHei","SimSun",sans-serif',fontSize:'15px'}});
+</script>
+</body></html>
