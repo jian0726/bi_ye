@@ -1,20 +1,20 @@
-# 日志
-*.log
-.backend.log
-.smoke-backend.log
-
-# 临时/备份文件
-.backup-pre-strip.sql
-.smoke*.json
-
-# 工具目录
-.workbuddy/
-
-# 依赖和构建产物
-node_modules/
+# 构建产物
 target/
 dist/
 build/
+node_modules/
+
+# 日志
+*.log
+
+# 备份文件
+scripts/backup/*.jar
+*.backup
+.backup-*
+
+# 临时文件
+.smoke*.json
+.workbuddy/
 
 # IDE
 .idea/
