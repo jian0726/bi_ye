@@ -45,6 +45,15 @@ services:
       jianyou-net:
         ipv4_address: 172.28.0.11
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "5"
+    deploy:
+      resources:
+        limits:
+          memory: 1G
 
   redis:
     image: redis:7-alpine
@@ -65,6 +74,15 @@ services:
       jianyou-net:
         ipv4_address: 172.28.0.12
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "5"
+    deploy:
+      resources:
+        limits:
+          memory: 256M
 
   # MinIO 对象存储：图片上传（9000 API / 9001 控制台）
   minio:
@@ -80,10 +98,26 @@ services:
     ports:
       - "127.0.0.1:${MINIO_API_PORT:-9000}:9000"
       - "127.0.0.1:${MINIO_CONSOLE_PORT:-9001}:9001"
+    # minio 镜像未自带 curl/wget，官方提供 mc 客户端；ready 子命令就绪即返回 0
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      timeout: 5s
+      start_period: 15s
+      retries: 10
     networks:
       jianyou-net:
         ipv4_address: 172.28.0.13
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "5"
+    deploy:
+      resources:
+        limits:
+          memory: 512M
 
   backend:
     build: ./blog-backend
@@ -131,19 +165,51 @@ services:
       jianyou-net:
         ipv4_address: 172.28.0.2
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "5"
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:8080/api/portal/site/stats || exit 1"]
+      interval: 30s
+      timeout: 5s
+      start_period: 90s
+      retries: 3
 
   frontend:
     build: ./blog-web
     container_name: jianyou-frontend
     ports:
+      # 对外只暴露前端；API 与对象存储均由前端 nginx 反代
       - "${FRONTEND_PORT:-5174}:80"
     # 固定 IP 用于后端可信代理白名单（nginx 反代时 XFF 校验只能认这个地址）
     networks:
       jianyou-net:
         ipv4_address: 172.28.0.3
     depends_on:
-      - backend
+      backend:
+        condition: service_started
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "5"
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
 
 # 自定义网段：固定 subnet，使前端容器能拿到稳定 IP 供后端白名单引用
 networks:

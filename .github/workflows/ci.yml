@@ -1,0 +1,108 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# 同一分支的新提交会取消上一次未跑完的任务，避免排队堆积
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # ---------------- 后端：编译 + 打包 + 测试 ----------------
+  backend:
+    name: Backend (Java 21)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: blog-backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      # 项目当前没有单元测试（src/test 为空），skipTests 只为避免空跑耗时；
+      # 日后补测试后请改为 -DskipTests=false 并保留此步骤
+      - name: Build and package
+        run: mvn -B -ntp package -DskipTests
+
+      - name: Upload jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: blog-backend-jar
+          path: blog-backend/target/blog-backend.jar
+          retention-days: 7
+          if-no-files-found: warn
+
+  # ---------------- 前端：类型检查 + 构建 ----------------
+  frontend:
+    name: Frontend (Node 22)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: blog-web
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: blog-web/package-lock.json
+
+      # npm ci 按 lock 文件精确安装，保证 CI 与本地/Docker 构建一致
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      # build = vue-tsc 类型检查 + vite build，类型不过即失败
+      - name: Type check and build
+        run: npm run build
+
+      - name: Verify dist
+        run: test -f dist/index.html && du -sh dist
+
+  # ---------------- 镜像可构建性验证 ----------------
+  # 不推送镜像，只验证两个 Dockerfile 在干净环境下能跑通，
+  # 避免出现「代码能编译但镜像构建失败」的上线事故
+  docker:
+    name: Docker build check
+    runs-on: ubuntu-latest
+    needs: [backend, frontend]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build backend image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./blog-backend
+          push: false
+          load: false
+          cache-from: type=gha,scope=backend
+          cache-to: type=gha,scope=backend,mode=max
+
+      - name: Build frontend image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./blog-web
+          push: false
+          load: false
+          cache-from: type=gha,scope=frontend
+          cache-to: type=gha,scope=frontend,mode=max
