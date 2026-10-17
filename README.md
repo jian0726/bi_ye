@@ -302,11 +302,6 @@ docker compose up -d
 | `scripts/test-readonly.py` | 只读接口测试（无需登录） |
 | `scripts/test-authed.py` | 需登录接口测试 |
 | `scripts/test-retest.py` | 回归测试 |
-| `scripts/verify-def01.py` | 验证缺陷 DEF-01 已修复 |
-| `scripts/verify-testcase-stats.py` | 反算测试用例统计 |
-| `scripts/make-toc-dynamic.py` | 重建正文动态目录 |
-| `scripts/replace-shots.py` | 替换正文截图 |
-| `scripts/_cleanup-run.sql` | 数据清理 |
 | `scripts/run-backend.cmd` | Windows 本地启动后端 |
 
 ---
