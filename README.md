@@ -106,6 +106,34 @@ powershell -File scripts/deploy.ps1    # Windows PowerShell
 
 首次启动会自动执行 `init.sql` 建表并灌入演示数据（17 篇文章、相册、留言、友链）。
 
+#### ⚠ 从旧部署升级时：改了密码必须清数据卷
+
+MySQL / Redis / MinIO 的密码只在**数据卷为空时**生效：
+
+- MySQL 的 `MYSQL_ROOT_PASSWORD` / `MYSQL_PASSWORD` 只在 `/var/lib/mysql` 为空时写入账号
+- MinIO 的 `MINIO_ROOT_USER` 只在 `/data` 为空时建立 root 账号
+- Redis 的密码每次启动都生效（命令行参数），不需要重建
+
+所以如果之前用旧密码跑过、现在改了 `.env`，后端会一直重启并报：
+
+```
+java.sql.SQLException: Access denied for user 'jianyou'@'172.28.0.2' (using password: YES)
+```
+
+两种解法：
+
+```bash
+# 解法一：丢弃旧数据，按新密码重建（演示/毕设场景推荐）
+docker compose down -v && docker compose up -d
+
+# 解法二：保留数据，把旧卷里的账号密码改成新值
+docker exec -it jianyou-mysql mysql -uroot -p<旧root密码>
+  ALTER USER 'jianyou'@'%' IDENTIFIED BY '<新密码>';
+  ALTER USER 'root'@'%'    IDENTIFIED BY '<新root密码>';
+  FLUSH PRIVILEGES;
+# MinIO 只能用旧账号登录控制台后新建/改密，或同样清 /data
+```
+
 ### 方式二：本地开发
 
 需要本机已装好 JDK 21、Maven 3.9、Node 20+、MySQL 8、Redis 7（MinIO 可选，不传图片可不启）。
@@ -310,4 +338,17 @@ docker compose up -d
 - **找回密码未接入真实短信/邮件通道**，生产环境下该功能实际不可用
 - 全文检索为 `title + summary` 的 LIKE 匹配，不支持全文索引
 - 文章版本历史未实现
-- 后端暂无单元测试，验证依赖 `scripts/` 下的接口测试脚本
+- 后端暂无单元测试（`src/test` 为空），验证依赖 `scripts/` 下的接口测试脚本与 GitHub Actions 构建校验
+- 登录接口无失败锁定与限流；CORS 仍为 `*`；未内置 HTTPS 证书
+
+## 自动化检查
+
+`.github/workflows/ci.yml` 在每次 push / PR 时跑三项：
+
+| Job | 内容 |
+|---|---|
+| Backend | JDK 21 + Maven 打包（`target/blog-backend.jar`） |
+| Frontend | Node 22 + `npm ci` + `vue-tsc` 类型检查 + `vite build` |
+| Docker build check | 两个 Dockerfile 在干净 Ubuntu 环境中构建（不推送） |
+
+三项全绿才认为合并安全。
