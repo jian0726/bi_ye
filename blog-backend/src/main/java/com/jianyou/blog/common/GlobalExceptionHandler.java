@@ -2,6 +2,7 @@ package com.jianyou.blog.common;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -57,6 +58,16 @@ public class GlobalExceptionHandler {
     public Result<Void> handleTypeMismatch(MethodArgumentTypeMismatchException e) {
         log.warn("参数类型不匹配: name={} value={}", e.getName(), e.getValue());
         return Result.error(400, "请求参数格式不正确");
+    }
+
+    /**
+     * 请求体无法解析（如 JSON 字段类型不匹配：content 传对象/数组、account 传对象）：
+     * 按参数错误返回 400，而不是兜底成 500（否则「请求体写错」会被误读成服务端故障）
+     */
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public Result<Void> handleNotReadable(HttpMessageNotReadableException e) {
+        log.warn("请求体解析失败: {}", e.getMessage());
+        return Result.error(400, "请求体格式不正确");
     }
 
     @ExceptionHandler(Exception.class)
