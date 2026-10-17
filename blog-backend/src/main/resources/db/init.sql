@@ -350,7 +350,7 @@ CREATE TABLE `t_photo` (
 
 INSERT INTO `t_photo` VALUES (1,'岳麓山日出',NULL,'长沙 · 岳麓山','2026-05-02','3/4','linear-gradient(160deg,#f5a15f,#b8440e)','🌄',1,1,'2026-09-22 09:12:35');
 INSERT INTO `t_photo` VALUES (2,'橘子洲的江风',NULL,'长沙 · 橘子洲','2026-04-12','4/3','linear-gradient(160deg,#5da291,#234439)','🌾',2,1,'2026-09-22 09:12:35');
-INSERT INTO `t_photo` VALUES (3,'深夜自习室','http://localhost:9000/jianyou-blog/2026/09/22/211c64af7016460281f6e784d0687ced.png','长沙 · 图书馆','2026-06-18','1085/498','linear-gradient(160deg,#3a3f6b,#1b1e38)','🌙',3,1,'2026-09-22 09:12:35');
+INSERT INTO `t_photo` VALUES (3,'深夜自习室','/files/jianyou-blog/2026/09/22/211c64af7016460281f6e784d0687ced.png','长沙 · 图书馆','2026-06-18','1085/498','linear-gradient(160deg,#3a3f6b,#1b1e38)','🌙',3,1,'2026-09-22 09:12:35');
 INSERT INTO `t_photo` VALUES (4,'宿舍窗外的雨',NULL,'长沙 · 学校','2026-03-21','4/5','linear-gradient(160deg,#7b8fa1,#39434e)','🌧️',4,1,'2026-09-22 09:12:35');
 INSERT INTO `t_photo` VALUES (5,'食堂三楼的糖醋排骨',NULL,'长沙 · 食堂','2026-03-08','1/1','linear-gradient(160deg,#d97757,#8c3b22)','🍛',5,1,'2026-09-22 09:12:35');
 INSERT INTO `t_photo` VALUES (6,'第一次跑完五公里',NULL,'长沙 · 操场','2026-02-27','4/3','linear-gradient(160deg,#e8c98d,#9c7a3c)','🏃',6,1,'2026-09-22 09:12:35');
@@ -381,7 +381,7 @@ INSERT INTO `t_music` VALUES (1,'Outfoxing the Fox','Jan Morgenstern · CC BY 3.
 INSERT INTO `t_music` VALUES (2,'Song No.1','SoundHelix · 免费示例曲','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',2,2,'2026-09-22 09:12:35');
 INSERT INTO `t_music` VALUES (3,'Song No.2','SoundHelix · 免费示例曲','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',3,2,'2026-09-22 09:12:35');
 INSERT INTO `t_music` VALUES (4,'Song No.3','SoundHelix · 免费示例曲','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',4,2,'2026-09-22 09:12:35');
-INSERT INTO `t_music` VALUES (8,'周杰伦 - 明明就','本地-周杰伦','http://localhost:9000/jianyou-blog/2026/09/22/5f397dcf03f147e182dc57c774c2d5d1.flac',5,1,'2026-09-22 09:38:55');
+INSERT INTO `t_music` VALUES (8,'周杰伦 - 明明就','本地-周杰伦','/files/jianyou-blog/2026/09/22/5f397dcf03f147e182dc57c774c2d5d1.flac',5,1,'2026-09-22 09:38:55');
 
 -- 互动计数不从种子预置：点赞数 / 收藏数 / 浏览量由真实互动累计
 UPDATE `t_article` SET like_count = 0, collect_count = 0, view_count = 0;

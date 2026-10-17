@@ -18,6 +18,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:jianyou_blog}?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
     username: ${MYSQL_USER:jianyou}
+    # 本地开发默认值；生产（prod profile）由 SecurityGuard 强制校验，缺省即拒启动
     password: ${MYSQL_PASSWORD:***REMOVED***}
     hikari:
       minimum-idle: 2
@@ -26,6 +27,8 @@ spring:
     redis:
       host: ${REDIS_HOST:localhost}
       port: ${REDIS_PORT:6379}
+      # 本地裸跑无密码时留空即可；容器部署由 compose 注入
+      password: ${REDIS_PASSWORD:}
       timeout: 3000ms
   jackson:
     # 全局日期格式，与前端 types 中的 'yyyy-MM-dd HH:mm:ss' 一致
@@ -38,7 +41,7 @@ mybatis-plus:
   global-config:
     banner: false
 
-# JWT 配置（生产环境用环境变量 JWT_SECRET 覆盖）
+# JWT 配置（生产必须用环境变量 JWT_SECRET 覆盖，prod profile 下由 SecurityGuard 强制校验）
 jwt:
   secret: ${JWT_SECRET:***REMOVED***}
   # access 短效令牌：每次请求携带，过期后前端用 refresh 静默换发（默认 2 小时）

@@ -1,22 +1,53 @@
-# 构建产物
+# ============================================================
+# 简柚博客 - Git 忽略规则
+# ============================================================
+
+# ---------- 环境变量与密钥（绝对不能提交） ----------
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.p12
+
+# ---------- 构建产物 ----------
 target/
 dist/
 build/
+out/
 node_modules/
+.pnpm-store/
 
-# 日志
+# ---------- 日志 ----------
 *.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# 备份文件
-scripts/backup/*.jar
+# ---------- 临时与备份文件 ----------
+.smoke*.json
 *.backup
 .backup-*
+*.tmp
+*.bak
+*~
+*.swp
 
-# 临时文件
-.smoke*.json
+# Word / Excel 打开文件时产生的锁文件
+~$*
+
+# ---------- 运行时数据 ----------
+*.pid
+*.seed
+*.pid.lock
+
+# ---------- 工具与 IDE ----------
 .workbuddy/
-
-# IDE
 .idea/
-.vscode/
+.vscode/*
+!.vscode/extensions.json
 *.iml
+.DS_Store
+Thumbs.db

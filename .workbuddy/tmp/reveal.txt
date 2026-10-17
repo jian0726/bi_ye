@@ -1,1 +1,0 @@
-"{\"revealCount\":0,\"visibleCount\":0,\"theme\":\"\",\"h1\":\"none\"}"
