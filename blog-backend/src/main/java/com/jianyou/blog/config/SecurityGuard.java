@@ -27,11 +27,12 @@ public class SecurityGuard {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityGuard.class);
 
-    /** 与 application.yml 中的默认值保持一致；生产出现这些值即为未覆盖 */
-    private static final String DEFAULT_JWT_SECRET =
-            "***REMOVED***";
-    private static final String DEFAULT_DB_PASSWORD = "***REMOVED***";
-    private static final String DEFAULT_MINIO_SECRET = "***REMOVED***";
+    /**
+     * 未配置时的占位值。
+     * application.yml 里所有敏感项写作 {@code ${VAR:__UNSET__}}，
+     * 仓库中因此不含任何真实凭据；本地开发需自行设置环境变量或使用 IDE 的运行配置。
+     */
+    private static final String UNSET = "__UNSET__";
 
     /** HMAC-SHA256 要求密钥至少 256 bit */
     private static final int MIN_JWT_SECRET_LENGTH = 32;
@@ -52,18 +53,18 @@ public class SecurityGuard {
     public void check() {
         List<String> problems = new ArrayList<>();
 
-        if (DEFAULT_JWT_SECRET.equals(jwtSecret)) {
-            problems.add("JWT_SECRET 仍是仓库中的默认值，请设置环境变量 JWT_SECRET");
-        } else if (jwtSecret == null || jwtSecret.length() < MIN_JWT_SECRET_LENGTH) {
+        if (UNSET.equals(jwtSecret) || isBlank(jwtSecret)) {
+            problems.add("JWT_SECRET 未设置，请通过环境变量注入");
+        } else if (jwtSecret.length() < MIN_JWT_SECRET_LENGTH) {
             problems.add("JWT_SECRET 长度不足 " + MIN_JWT_SECRET_LENGTH + " 字符（HMAC-SHA256 要求至少 256 bit）");
         }
 
-        if (DEFAULT_DB_PASSWORD.equals(dbPassword)) {
-            problems.add("MYSQL_PASSWORD 仍是仓库中的默认值，请设置环境变量 MYSQL_PASSWORD");
+        if (UNSET.equals(dbPassword) || isBlank(dbPassword)) {
+            problems.add("MYSQL_PASSWORD 未设置，请通过环境变量注入");
         }
 
-        if (DEFAULT_MINIO_SECRET.equals(minioSecret)) {
-            problems.add("MINIO_SECRET_KEY 仍是仓库中的默认值，请设置环境变量 MINIO_SECRET_KEY");
+        if (UNSET.equals(minioSecret) || isBlank(minioSecret)) {
+            problems.add("MINIO_SECRET_KEY 未设置，请通过环境变量注入");
         }
 
         if (verifyDevMode) {
@@ -82,5 +83,9 @@ public class SecurityGuard {
         }
 
         log.info("生产环境安全校验通过");
+    }
+
+    private static boolean isBlank(String s) {
+        return s == null || s.trim().isEmpty();
     }
 }
