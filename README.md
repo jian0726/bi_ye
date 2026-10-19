@@ -34,7 +34,7 @@
 | 缓存 | Redis | 7 |
 | 认证 | JJWT（JWT） | 0.12.x |
 | 对象存储 | MinIO | latest |
-| 工具库 | Hutool / Lombok | — |
+| 工具库 | Lombok | — |
 
 **没有使用 Spring Security**。鉴权由 `AuthInterceptor` + `AuthContext` 手工实现，JWT 由 `JwtUtil` 签发与校验；密码哈希单独引入 `spring-security-crypto` 使用 BCrypt。
 
@@ -63,7 +63,7 @@
 | 路由 | 页面 | 说明 |
 |---|---|---|
 | `/` | 首页 | 刊头 Hero + 精选 + 时间线列表 |
-| `/articles` | 文章列表 | 分页、分类筛选 |
+| `/articles` | — | 聚合列表页已下线，重定向到首页（游记 / 随笔 / 记录为三个独立页面） |
 | `/article/:id` | 文章详情 | Markdown 渲染、阅读进度、点赞、收藏 |
 | `/category/1` | 记录 | 独立版式 |
 | `/category/2` | 游记 | 独立版式 |
@@ -80,7 +80,7 @@
 
 ### 后台（管理员）
 
-`/admin` 下共 11 个模块：仪表盘、文章管理、文章编辑、分类、标签、留言、友链、文件、用户、相册、音乐。
+`/admin` 下共 11 个模块：仪表盘、文章管理、分类、标签、留言、友链、资源、用户、相册、音乐、网站设置（文章新增 / 编辑走 `/admin/articles/edit`，不单列菜单）。
 
 ---
 
@@ -149,7 +149,21 @@ npm install
 npm run dev          # http://localhost:5173，已配置 /api 与 /files 代理
 ```
 
-本地开发无需配置环境变量，`application.yml` 中的默认值可直接使用。
+本地开发**必须自行注入两个变量**——`application.yml` 里的敏感项默认值是占位符 `__UNSET__`，直接裸跑会在启动阶段失败（`JwtUtil` 用 `Keys.hmacShaKeyFor()` 建密钥，长度不足 32 字节会抛 `WeakKeyException`）：
+
+```bash
+# Git Bash / macOS / Linux
+export MYSQL_PASSWORD='你的本地 MySQL 密码'
+export JWT_SECRET='至少 32 个字符的随机串'
+mvn spring-boot:run
+
+# Windows PowerShell
+$env:MYSQL_PASSWORD='你的本地 MySQL 密码'
+$env:JWT_SECRET='至少 32 个字符的随机串'
+mvn spring-boot:run
+```
+
+其余变量可留默认：`MYSQL_HOST` / `MYSQL_PORT` / `MYSQL_DB` / `MYSQL_USER` 默认 `localhost` / `3306` / `jianyou_blog` / `jianyou`；Redis 密码默认空（本机 Redis 未设密码时可直接连）。不设置 `SPRING_PROFILES_ACTIVE` 即非 prod，`SecurityGuard` 不触发。
 
 ---
 
